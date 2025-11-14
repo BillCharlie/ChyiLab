@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>開課內容 - 教授個人網站</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --bg: #020617;
+            --bg-card: #020819;
+            --bg-soft: #0b1120;
+            --border-subtle: #1f2937;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56,189,248,0.12);
+            --text-main: #e5e7eb;
+            --text-muted: #9ca3af;
+            --heading: #f9fafb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         "Noto Sans TC", "PingFang TC", sans-serif;
+            background:
+                radial-gradient(circle at 0% 0%, #1d2a41 0, transparent 50%),
+                radial-gradient(circle at 100% 0%, #0b1120 0, transparent 55%),
+                linear-gradient(160deg, #020617 0%, #020617 60%, #020617 100%);
+            color: var(--text-main);
+            line-height: 1.75;
+        }
+
+        /* -------- 導覽列 -------- */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(15,23,42,0.96);
+            border-bottom: 1px solid var(--border-subtle);
+            backdrop-filter: blur(10px);
+        }
+
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 10px 18px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px 20px;
+            justify-content: space-between;
+        }
+
+        nav .nav-title {
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        nav .nav-links {
+            flex: 1;
+            text-align: right;
+            font-size: 0.9rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 4px 8px;
+            margin: 0 2px;
+            border-radius: 999px;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+        }
+
+        nav a:hover {
+            background: var(--accent-soft);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        /* -------- 內容框架 -------- */
+        .page-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 18px 56px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 0.8rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin: 4px 0 6px;
+            font-size: 1.8rem;
+            color: var(--heading);
+        }
+
+        .subtitle {
+            margin: 0 0 16px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* -------- 課程大卡 -------- */
+        .course-card {
+            margin-top: 22px;
+            padding: 22px 24px 22px;
+            border-radius: 20px;
+            background: radial-gradient(circle at 0% 0%, rgba(56,189,248,0.16), transparent 65%),
+                        radial-gradient(circle at 120% -10%, rgba(37,99,235,0.42), transparent 55%),
+                        linear-gradient(145deg, #020617, #020617 28%, #020b24 100%);
+            border: 1px solid rgba(55,65,81,0.95);
+            box-shadow: 0 20px 45px rgba(15,23,42,0.9);
+        }
+
+        .course-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .course-title {
+            font-size: 1.1rem;
+            color: var(--heading);
+        }
+
+        .course-title span {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-left: 8px;
+        }
+
+        .course-badge {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(15,23,42,0.9);
+            border: 1px solid rgba(56,189,248,0.65);
+            color: var(--accent);
+            white-space: nowrap;
+        }
+
+        .course-meta-grid {
+            margin-top: 6px;
+            margin-bottom: 4px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 8px 18px;
+            font-size: 0.9rem;
+        }
+
+        .meta-item {
+            min-width: 0;
+        }
+
+        .meta-label {
+            display: block;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1px;
+        }
+
+        .meta-value {
+            color: var(--heading);
+        }
+
+        /* -------- 課程內部小卡片 (.course-section) -------- */
+        .course-sections {
+            margin-top: 14px;
+            display: grid;
+            grid-template-columns: minmax(0,1fr);
+            gap: 10px;
+        }
+
+        .course-section {
+            border-radius: 14px;
+            padding: 12px 14px 12px;
+            background: rgba(15,23,42,0.96);
+            border: 1px solid rgba(55,65,81,0.9);
+        }
+
+        .course-section-title {
+            margin: 0 0 6px;
+            font-size: 0.95rem;
+            color: var(--heading);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .course-section-title::before {
+            content: "";
+            width: 4px;
+            height: 14px;
+            border-radius: 999px;
+            background: var(--accent);
+        }
+
+        .course-section-body {
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        .course-section-body p {
+            margin: 0 0 4px;
+        }
+
+        /* -------- 單元主題：小卡片 -------- */
+        .unit-grid {
+            margin-top: 6px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 10px 14px;
+            font-size: 0.86rem;
+        }
+
+        .unit-block {
+            background: rgba(15,23,42,0.96);
+            border-radius: 12px;
+            border: 1px solid rgba(55,65,81,0.8);
+            padding: 8px 10px 8px;
+        }
+
+        .unit-block h4 {
+            margin: 0 0 4px;
+            font-size: 0.9rem;
+            color: var(--heading);
+        }
+
+        .unit-block ul {
+            margin: 0;
+            padding-left: 16px;
+            color: var(--text-muted);
+        }
+
+        .unit-block li {
+            margin: 0 0 2px;
+        }
+
+        @media (max-width: 800px) {
+            nav .nav-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav .nav-links {
+                text-align: left;
+                width: 100%;
+                line-height: 1.6;
+            }
+
+            .course-card {
+                padding: 18px 16px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 導覽列 -->
+<nav>
+    <div class="nav-inner">
+        <div class="nav-title">Prof. Jen-Inn Chyi · Lab</div>
+        <div class="nav-links">
+            <a href="index.html">首頁</a>
+            <a href="professor.html">教授簡介</a>
+            <a href="research.html">研究計劃</a>
+            <a href="team.html">研究團隊</a>
+            <a href="achievements.html">研究成果</a>
+            <a href="publications.html">論文發表</a>
+            <a href="courses.html">開課內容</a>
+            <a href="equipment.html">實驗設備</a>
+            <a href="life.html">生活剪映</a>
+            <a href="links.html">相關連結</a>
+        </div>
+    </div>
+</nav>
+
+<div class="page-wrapper">
+    <span class="eyebrow">Courses</span>
+    <h1>開課內容</h1>
+    <p class="subtitle">近年經常開授之課程摘要，包含課程資訊、目標與單元綱要。</p>
+
+    <!-- 上學期：化合物半導體 -->
+    <section class="course-card">
+        <header class="course-header">
+            <div class="course-title">
+                化合物半導體
+                <span>Compound Semiconductors</span>
+            </div>
+            <div class="course-badge">上學期 · Graduate / Senior</div>
+        </header>
+
+        <div class="course-meta-grid">
+            <div class="meta-item">
+                <span class="meta-label">開課單位</span>
+                <span class="meta-value">電機系</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">授課教師</span>
+                <span class="meta-value">綦振瀛 教授</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">課程代碼</span>
+                <span class="meta-value">EE7039</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">選課性質</span>
+                <span class="meta-value">選修 · 3 學分</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">開課年級</span>
+                <span class="meta-value">大四 / 研究所</span>
+            </div>
+        </div>
+
+        <div class="course-sections">
+            <div class="course-section">
+                <h3 class="course-section-title">課程概述</h3>
+                <div class="course-section-body">
+                    <p>
+                        本課教授內容包括常見化合物半導體之晶體成長及磊晶技術、能帶特性、
+                        載子傳輸特性以及光學特性，並以各種異質結構所形成之元件為例，
+                        介紹化合物半導體元件之工作原理及應用場合。
+                    </p>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3 class="course-section-title">課程目標</h3>
+                <div class="course-section-body">
+                    <p>
+                        修習者能了解化合物半導體材料之製備技術及特有光電特性，
+                        掌握現有化合物半導體元件之工作原理，並據此發展元件結構設計之能力。
+                    </p>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3 class="course-section-title">教科書與參考書</h3>
+                <div class="course-section-body">
+                    <p><strong>教科書：</strong>Electronic and Optoelectronic Properties of Semiconductor Structures — Jasprit Singh</p>
+                    <p><strong>參考書：</strong>Materials Aspects of GaAs and InP Based Structures — V. Swaminathan, A. T. Macrander</p>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3 class="course-section-title">評量方式</h3>
+                <div class="course-section-body">
+                    <p>期中考、期末考、報告。</p>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3 class="course-section-title">單元主題與綱要</h3>
+                <div class="course-section-body">
+                    <div class="unit-grid">
+                        <div class="unit-block">
+                            <h4>Introduction</h4>
+                            <ul>
+                                <li>Typical compound semiconductors</li>
+                                <li>Applications</li>
+                            </ul>
+                        </div>
+
+                        <div class="unit-block">
+                            <h4>Material Preparation</h4>
+                            <ul>
+                                <li>Bulk growth</li>
+                                <li>Epitaxy</li>
+                                <li>LPE, VPE</li>
+                                <li>MOCVD</li>
+                                <li>MBE</li>
+                            </ul>
+                        </div>
+
+                        <div class="unit-block">
+                            <h4>Semiconductor Physics &amp; Properties</h4>
+                            <ul>
+                                <li>Electronic properties</li>
+                                <li>Crystal structure and bandgap</li>
+                                <li>Density of states, effective mass</li>
+                                <li>Alloys and heterostructures</li>
+                                <li>Strain</li>
+                                <li>Transport properties</li>
+                                <li>Mobility and scattering mechanisms</li>
+                            </ul>
+                        </div>
+
+                        <div class="unit-block">
+                            <h4>Optical Properties</h4>
+                            <ul>
+                                <li>Fermi golden rule</li>
+                                <li>Interband / intraband transitions</li>
+                                <li>Excitons in low-dimensional structures</li>
+                                <li>Nonradiative processes</li>
+                            </ul>
+                        </div>
+
+                        <div class="unit-block">
+                            <h4>Device Applications · Optical</h4>
+                            <ul>
+                                <li>LED</li>
+                                <li>LD &amp; VCSEL</li>
+                                <li>Photodetectors (PD)</li>
+                                <li>Modulators</li>
+                            </ul>
+                        </div>
+
+                        <div class="unit-block">
+                            <h4>Device Applications · Electronic</h4>
+                            <ul>
+                                <li>MESFET</li>
+                                <li>HEMT</li>
+                                <li>HBT</li>
+                                <li>RTD</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 下學期：近代物理 -->
+    <section class="course-card">
+        <header class="course-header">
+            <div class="course-title">
+                近代物理
+                <span>Modern Physics</span>
+            </div>
+            <div class="course-badge">下學期 · Undergraduate</div>
+        </header>
+
+        <div class="course-meta-grid">
+            <div class="meta-item">
+                <span class="meta-label">開課單位</span>
+                <span class="meta-value">電機系</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">授課教師</span>
+                <span class="meta-value">綦振瀛 教授</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">課程代碼</span>
+                <span class="meta-value">EE2023</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">選課性質</span>
+                <span class="meta-value">選修 · 3 學分</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">開課年級</span>
+                <span class="meta-value">大二</span>
+            </div>
+        </div>
+
+        <div class="course-sections">
+            <div class="course-section">
+                <h3 class="course-section-title">課程概述</h3>
+                <div class="course-section-body">
+                    <p>
+                        本課由歷史上著名實驗與發現切入，說明物質與光的波粒二象性，
+                        引出微觀世界量子化概念。結合量子物理與統計物理，
+                        說明原子、分子及固體之光譜成因與物理化學特性，
+                        並介紹基本半導體物理及元件工作原理。
+                    </p>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3 class="course-section-title">課程目標</h3>
+                <div class="course-section-body">
+                    <p>
+                        使修課學生具備基本量子物理與統計物理觀念，
+                        了解半導體能帶理論與基本特性，為日後學習半導體元件、
+                        光電元件、奈米元件奠定基礎。
+                    </p>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3 class="course-section-title">教科書與參考書</h3>
+                <div class="course-section-body">
+                    <p><strong>教科書：</strong>Modern Physics (3rd Ed.) — Serway, Moses &amp; Moyer</p>
+                    <p><strong>參考書：</strong>（授課時另行公告）</p>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3 class="course-section-title">評量方式</h3>
+                <div class="course-section-body">
+                    <p>期中考、期末考。</p>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3 class="course-section-title">單元主題與綱要</h3>
+                <div class="course-section-body">
+                    <div class="unit-grid">
+                        <div class="unit-block">
+                            <h4>The Quantum Theory of Light</h4>
+                            <ul>
+                                <li>Blackbody radiation &amp; Planck’s law</li>
+                                <li>Photoelectric effect</li>
+                                <li>Compton effect and X-rays</li>
+                                <li>Particle–wave complementarity</li>
+                            </ul>
+                        </div>
+
+                        <div class="unit-block">
+                            <h4>The Particle Nature of Matter</h4>
+                            <ul>
+                                <li>Composition of atoms</li>
+                                <li>The Bohr atom</li>
+                                <li>Franck–Hertz experiment</li>
+                                <li>De Broglie wavelength</li>
+                                <li>Davisson–Germer experiment</li>
+                                <li>Matter wave packets</li>
+                                <li>Heisenberg uncertainty principle</li>
+                            </ul>
+                        </div>
+
+                        <div class="unit-block">
+                            <h4>Quantum Mechanics in One Dimension</h4>
+                            <ul>
+                                <li>Born interpretation</li>
+                                <li>Particle in a box</li>
+                                <li>Finite square well</li>
+                                <li>Quantum harmonic oscillator</li>
+                                <li>Expectation values</li>
+                                <li>Tunneling phenomena</li>
+                            </ul>
+                        </div>
+
+                        <div class="unit-block">
+                            <h4>Quantum Mechanics in Three Dimensions</h4>
+                            <ul>
+                                <li>Three-dimensional box</li>
+                                <li>Space quantization</li>
+                                <li>Angular momentum &amp; energy quantization</li>
+                                <li>Atomic hydrogen</li>
+                                <li>Atomic structure, Zeeman effect</li>
+                                <li>Spin, spin–orbit interaction</li>
+                                <li>Exclusion principle &amp; periodic table</li>
+                                <li>X-ray spectra &amp; Moseley’s law</li>
+                            </ul>
+                        </div>
+
+                        <div class="unit-block">
+                            <h4>Statistical Physics</h4>
+                            <ul>
+                                <li>Maxwell–Boltzmann distribution</li>
+                                <li>Bose–Einstein distribution</li>
+                                <li>Fermi–Dirac distribution</li>
+                            </ul>
+                        </div>
+
+                        <div class="unit-block">
+                            <h4>Molecular Structure</h4>
+                            <ul>
+                                <li>Bonding mechanisms</li>
+                                <li>Molecular rotation and vibration</li>
+                                <li>Molecular spectra</li>
+                            </ul>
+                        </div>
+
+                        <div class="unit-block">
+                            <h4>The Solid State</h4>
+                            <ul>
+                                <li>Bonding in solids</li>
+                                <li>Quantum theory of metals</li>
+                                <li>Band theory of solids</li>
+                                <li>Semiconductor devices</li>
+                                <li>Superconductivity</li>
+                                <li>Lasers</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+   <div >Website crafted by Bill Chen · Last updated: 2025/11/05
+</div>
+</body>
+</html>

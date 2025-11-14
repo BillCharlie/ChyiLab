@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>教授簡介 - 教授個人網站</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --bg: #020617;
+            --bg-card: #020819;
+            --bg-soft: #0b1120;
+            --border-subtle: #1f2937;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56,189,248,0.12);
+            --text-main: #e5e7eb;
+            --text-muted: #9ca3af;
+            --heading: #f9fafb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         "Noto Sans TC", "PingFang TC", sans-serif;
+            background:
+                radial-gradient(circle at 0% 0%, #1d2a41 0, transparent 50%),
+                radial-gradient(circle at 100% 0%, #0b1120 0, transparent 55%),
+                linear-gradient(160deg, #020617 0%, #020617 60%, #020617 100%);
+            color: var(--text-main);
+            line-height: 1.75;
+        }
+
+        /* --------------- 導覽列 --------------- */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(15,23,42,0.96);
+            border-bottom: 1px solid var(--border-subtle);
+            backdrop-filter: blur(10px);
+        }
+
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 10px 18px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px 20px;
+            justify-content: space-between;
+        }
+
+        nav .nav-title {
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        nav .nav-links {
+            flex: 1;
+            text-align: right;
+            font-size: 0.9rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 4px 8px;
+            margin: 0 2px;
+            border-radius: 999px;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+        }
+
+        nav a:hover {
+            background: var(--accent-soft);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        /* --------------- 內容框架 --------------- */
+        .page-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 18px 56px;
+        }
+
+        .page-header {
+            margin-bottom: 28px;
+            border-bottom: 1px solid rgba(148,163,184,0.25);
+            padding-bottom: 16px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 0.8rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin: 4px 0 4px;
+            font-size: 1.9rem;
+            color: var(--heading);
+        }
+
+        .subtitle {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* --------------- 個人簡介區 --------------- */
+        .profile-card {
+            display: grid;
+            grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+            gap: 24px;
+            margin-top: 24px;
+            padding: 24px 24px 20px;
+            border-radius: 18px;
+            background: radial-gradient(circle at 0% 0%, #111827, transparent 55%),
+                        var(--bg-soft);
+            box-shadow: 0 18px 40px rgba(15,23,42,0.8);
+            border: 1px solid rgba(148,163,184,0.4);
+        }
+
+        .profile-photo {
+            text-align: center;
+        }
+
+        .profile-photo img {
+            width: 190px;
+            max-width: 100%;
+            border-radius: 20px;
+            display: block;
+            margin: 0 auto 14px;
+            box-shadow: 0 18px 40px rgba(15,23,42,0.9);
+        }
+
+        .prof-name {
+            margin: 0 0 6px;
+            font-size: 1.25rem;
+            color: var(--heading);
+        }
+
+        .prof-title {
+            margin: 0;
+            font-size: 0.98rem;
+            color: var(--text-muted);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(15,118,110,0.14);
+            color: #6ee7b7;
+            margin-top: 6px;
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: #6ee7b7;
+        }
+
+        .contact-card {
+            margin-top: 10px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: rgba(15,23,42,0.8);
+            border: 1px solid rgba(51,65,85,0.9);
+            font-size: 0.9rem;
+        }
+
+        .contact-row {
+            margin: 2px 0;
+        }
+
+        .label {
+            display: inline-block;
+            min-width: 70px;
+            color: var(--text-muted);
+        }
+
+        .contact-card a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* --------------- 內文 --------------- */
+        .section {
+            margin-top: 32px;
+            padding: 22px 24px 20px;
+            border-radius: 18px;
+            background: rgba(15,23,42,0.9);
+            border: 1px solid rgba(51,65,85,0.9);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 1.05rem;
+            color: var(--heading);
+            border-left: 3px solid var(--accent);
+            padding-left: 10px;
+        }
+
+        .section-note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .section p {
+            margin-top: 0;
+            margin-bottom: 0.6em;
+            text-align: justify;
+        }
+
+        /* --------------- 表格樣式 --------------- */
+        .table-wrapper {
+            margin-top: 12px;
+            overflow-x: auto;
+        }
+
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            min-width: 420px;
+        }
+
+        table.data-table th,
+        table.data-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid rgba(51,65,85,0.9);
+            vertical-align: top;
+        }
+
+        table.data-table th {
+            text-align: left;
+            font-weight: 600;
+            background: linear-gradient(90deg, rgba(15,23,42,1), rgba(30,64,175,0.65));
+            color: #e5e7eb;
+            border-bottom: 1px solid #1d4ed8;
+            white-space: nowrap;
+        }
+
+        table.data-table tbody tr:nth-child(even) {
+            background: rgba(15,23,42,0.8);
+        }
+
+        table.data-table tbody tr:nth-child(odd) {
+            background: rgba(15,23,42,0.55);
+        }
+
+        table.data-table tbody tr:hover {
+            background: rgba(30,64,175,0.35);
+        }
+
+        /* --------------- RWD --------------- */
+        @media (max-width: 800px) {
+            .profile-card {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            nav .nav-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav .nav-links {
+                text-align: left;
+                width: 100%;
+                line-height: 1.6;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 導覽列 -->
+    <nav>
+        <div class="nav-inner">
+            <div class="nav-title">Prof. Jen-Inn Chyi · Lab</div>
+            <div class="nav-links">
+                <a href="index.html">首頁</a>
+                <a href="professor.html">教授簡介</a>
+                <a href="research.html">研究計劃</a>
+                <a href="team.html">研究團隊</a>
+                <a href="achievements.html">研究成果</a>
+                <a href="publications.html">論文發表</a>
+                <a href="courses.html">開課內容</a>
+                <a href="equipment.html">實驗設備</a>
+                <a href="life.html">生活剪映</a>
+                <a href="links.html">相關連結</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <!-- 頁首 -->
+        <header class="page-header">
+            <div class="eyebrow">Professor Profile</div>
+            <h1>教授簡介</h1>
+            <p class="subtitle">國立中央大學 電機工程學系 · 半導體與光電元件研究實驗室</p>
+        </header>
+
+        <!-- 個人簡介卡片 -->
+        <section class="profile-card">
+            <div class="profile-photo">
+                <img src="png/Chyi_photo.png" alt="綦振瀛 教授照片">
+                <p class="prof-name">綦振瀛 教授 (Prof. Jen-Inn Chyi)</p>
+                <p class="prof-title">Chair Professor, Department of Electrical Engineering, NCU</p>
+                <div class="badge">
+                    <span class="badge-dot"></span>
+                    IEEE Fellow · SPIE Fellow
+                </div>
+            </div>
+
+            <div>
+                <div class="contact-card">
+                    <div class="contact-row">
+                        <span class="label">ROOM：</span>
+                        工程二館電機系 408 室 (E1-408)
+                    </div>
+                    <div class="contact-row">
+                        <span class="label">E-MAIL：</span>
+                        <a href="mailto:chyi@ee.ncu.edu.tw">chyi@ee.ncu.edu.tw</a>
+                    </div>
+                    <div class="contact-row">
+                        <span class="label">ADD：</span>
+                        320317 桃園市中壢區中大路 300 號<br>
+                        （國立中央大學 電機工程學系）
+                    </div>
+                    <div class="contact-row">
+                        <span class="label">TEL：</span>
+                        (03)422-7151 ext.34470
+                    </div>
+                    <div class="contact-row">
+                        <span class="label">FAX：</span>
+                        (03)425-8241
+                    </div>
+                </div>
+
+                <div class="section" style="margin-top:18px;">
+                    <div class="section-header">
+                        <h2 class="section-title">英文簡介 (Biography)</h2>
+                    </div>
+
+                    <p>
+                        Jen-Inn Chyi received the B.S. and M.S. degrees in electrical engineering from
+                        National Tsing-Hua University, Hsin-Chu, Taiwan, R.O.C., in 1982 and 1984, respectively,
+                        and the Ph.D. degree in electrical engineering from the University of Illinois at
+                        Urbana-Champaign in 1990. His Ph.D. dissertation dealt with molecular beam epitaxial (MBE)
+                        growth and characterization of InSb on GaAs.
+                    </p>
+
+                    <p>
+                        In 1991, he joined the Department of Electrical Engineering, National Central University,
+                        Jhongli, Taiwan, R.O.C.. Since then, he has established MBE, metal-organic vapor phase epitaxy
+                        (MOVPE), and high-speed optoelectronic devices laboratories, which house growth and
+                        characterization facilities for various III-V materials and devices. He was the Director of
+                        Optical Sciences Center, NCU, from 2000 to 2007, and Dean of the College of Electrical
+                        Engineering and Computer Science, NCU, from 2006 to 2011. He is currently Chair Professor
+                        of Electrical Engineering, NCU.
+                    </p>
+
+                    <p>
+                        His research interests are in the areas of MBE and MOVPE growth of III-V semiconductors
+                        and their heterostructures for high-speed electronic and optoelectronic devices. His current
+                        research projects include MBE growth of InP-based heterojunction bipolar transistors,
+                        quantum-dot photonic devices, and MOVPE growth of GaN-based materials for ultraviolet,
+                        blue, and green emitters as well as high-power devices.
+                    </p>
+
+                    <p>
+                        Professor Chyi has authored or co-authored over 280 journal papers and has been granted
+                        29 patents. He received the Distinguished Young Researcher Award of the Electronic Devices
+                        and Materials Association, Taiwan, R.O.C. in 1996, the Distinguished Research Award of the
+                        National Science Council, Taiwan, R.O.C. in 2002 and 2010, the Distinguished Professor Award
+                        of the Chinese Institute of Electrical Engineering in 2004, and the Industrial Contribution
+                        Award from the Ministry of Economic Affairs, Taiwan, R.O.C. in 2008. He also serves as a
+                        Distinguished Lecturer of IEEE EDS since 2004. He has served as an Associate Editor of
+                        <em>IEEE Photonics Technology Letters</em> and as an Overseas Editor of
+                        <em>Japanese Journal of Applied Physics</em>. Dr. Chyi is a member of Phi Tau Phi, and
+                        a Fellow of IEEE and SPIE.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 主要經歷 -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">主要經歷</h2>
+                <div class="section-note">依時間排序 · 包含學術與行政職務</div>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>服務單位</th>
+                            <th>職稱</th>
+                            <th>起迄年月</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>國立中央大學</td>
+                            <td>副校長</td>
+                            <td>2021/02 ~ 迄今</td>
+                        </tr>
+                        <tr>
+                            <td>中國電機工程學會</td>
+                            <td>常務理事</td>
+                            <td>2021 ~ 迄今</td>
+                        </tr>
+                        <tr>
+                            <td>台灣半導體產學研發聯盟</td>
+                            <td>常務監事</td>
+                            <td>2020 ~ 迄今</td>
+                        </tr>
+                        <tr>
+                            <td>台灣電子材料與元件協會</td>
+                            <td>常務理事</td>
+                            <td>2019 ~ 迄今</td>
+                        </tr>
+                        <tr>
+                            <td>中華安全科技與管理學</td>
+                            <td>理事長</td>
+                            <td>2018 ~ 迄今</td>
+                        </tr>
+                        <tr>
+                            <td>國立中央大學前瞻科技研究中心</td>
+                            <td>主任</td>
+                            <td>2018/02 ~ 迄今</td>
+                        </tr>
+                        <tr>
+                            <td>臺灣聯合大學系統</td>
+                            <td>系統副校長</td>
+                            <td>2015/08 ~ 2021/01</td>
+                        </tr>
+                        <tr>
+                            <td>國家實驗研究院</td>
+                            <td>副院長</td>
+                            <td>2012/08 ~ 2015/04</td>
+                        </tr>
+                        <tr>
+                            <td>國立中央大學資電學院</td>
+                            <td>院長</td>
+                            <td>2006/11 ~ 2011/07</td>
+                        </tr>
+                        <tr>
+                            <td>中央研究院應用科學中心</td>
+                            <td>合聘研究員</td>
+                            <td>2006/08 ~ 迄今</td>
+                        </tr>
+                        <tr>
+                            <td>國立中央大學光電科學研究中心</td>
+                            <td>主任</td>
+                            <td>2000/08 ~ 2007/04</td>
+                        </tr>
+                        <tr>
+                            <td>國立中央大學電機工程學系</td>
+                            <td>教授</td>
+                            <td>1996/08 ~ 迄今</td>
+                        </tr>
+                        <tr>
+                            <td>國立中央大學電機工程學系</td>
+                            <td>副教授</td>
+                            <td>1991/02 ~ 1996/07</td>
+                        </tr>
+                        <tr>
+                            <td>美國伊利諾大學</td>
+                            <td>博士後研究員</td>
+                            <td>1990/11 ~ 1991/01</td>
+                        </tr>
+                        <tr>
+                            <td>澳洲新南威爾斯大學</td>
+                            <td>訪問研究員</td>
+                            <td>2008/02 ~ 2010/01</td>
+                        </tr>
+                        <tr>
+                            <td>經濟部技術處</td>
+                            <td>顧問</td>
+                            <td>2012 ~ 2014</td>
+                        </tr>
+                        <tr>
+                            <td>工研院光電所</td>
+                            <td>顧問</td>
+                            <td>1999 ~ 2001</td>
+                        </tr>
+                        <tr>
+                            <td>財團法人電信技術研究中心</td>
+                            <td>董事</td>
+                            <td>2004 ~ 2008</td>
+                        </tr>
+                        <tr>
+                            <td>國研院國家奈米元件實驗室</td>
+                            <td>諮詢委員</td>
+                            <td>2005 ~ 2008</td>
+                        </tr>
+                        <tr>
+                            <td>台灣電子材料與元件協會</td>
+                            <td>常務監事</td>
+                            <td>2009 ~ 2010</td>
+                        </tr>
+                        <tr>
+                            <td>台灣電子材料與元件協會</td>
+                            <td>理事</td>
+                            <td>2011 ~</td>
+                        </tr>
+                        <tr>
+                            <td>台灣資訊儲存技術協會</td>
+                            <td>理事</td>
+                            <td>2005 ~ 2009</td>
+                        </tr>
+                        <tr>
+                            <td>Japanese Journal of Applied Physics</td>
+                            <td>海外編輯</td>
+                            <td>2004 ~</td>
+                        </tr>
+                        <tr>
+                            <td>IEEE Photonics Technology Letters</td>
+                            <td>副編輯</td>
+                            <td>2005 ~ 2011</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 學術榮譽 -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">學術榮譽</h2>
+                <div class="section-note">重要學術與研究獎項</div>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>年度</th>
+                            <th>學術榮譽／獎項</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1982</td>
+                            <td>獲選斐陶斐榮譽學會會員</td>
+                        </tr>
+                        <tr>
+                            <td>1996</td>
+                            <td>獲中華民國電子材料與元件協會傑出青年獎</td>
+                        </tr>
+                        <tr>
+                            <td>1996、1998</td>
+                            <td>獲中國工程師學會工程論文獎</td>
+                        </tr>
+                        <tr>
+                            <td>1996、1998、1999、2008</td>
+                            <td>獲電子材料與元件研討會最佳論文獎</td>
+                        </tr>
+                        <tr>
+                            <td>2002</td>
+                            <td>獲國科會傑出研究獎</td>
+                        </tr>
+                        <tr>
+                            <td>2004</td>
+                            <td>獲中國電機工程學會傑出電機工程教授獎</td>
+                        </tr>
+                        <tr>
+                            <td>2004</td>
+                            <td>獲選 IEEE 電子元件分會傑出講員 (Distinguished Lecturer)</td>
+                        </tr>
+                        <tr>
+                            <td>2005</td>
+                            <td>獲中央大學特聘教授</td>
+                        </tr>
+                        <tr>
+                            <td>2005、2006、2007</td>
+                            <td>獲國科會第一級主持人費</td>
+                        </tr>
+                        <tr>
+                            <td>2006</td>
+                            <td>獲晶片系統國家型科技計畫傑出計畫獎</td>
+                        </tr>
+                        <tr>
+                            <td>2007、2009、2010、2011、2012、2013、2014</td>
+                            <td>獲中央大學傑出技術移轉貢獻獎</td>
+                        </tr>
+                        <tr>
+                            <td>2007、2009、2010、2011、2012、2013、2014</td>
+                            <td>獲中央大學績優專利獎</td>
+                        </tr>
+                        <tr>
+                            <td>2008、2009、2010</td>
+                            <td>獲中央大學績優技轉獎</td>
+                        </tr>
+                        <tr>
+                            <td>2008</td>
+                            <td>獲中央大學講座教授</td>
+                        </tr>
+                        <tr>
+                            <td>2008</td>
+                            <td>獲經濟部大學產業經濟貢獻獎－產業深耕獎</td>
+                        </tr>
+                        <tr>
+                            <td>2009</td>
+                            <td>獲國科會傑出研究學者計畫</td>
+                        </tr>
+                        <tr>
+                            <td>2009</td>
+                            <td>獲台灣聯合大學系統講座教授</td>
+                        </tr>
+                        <tr>
+                            <td>2009</td>
+                            <td>獲國科會傑出研究獎</td>
+                        </tr>
+                        <tr>
+                            <td>2011</td>
+                            <td>獲選 IEEE Fellow</td>
+                        </tr>
+                        <tr>
+                            <td>2011</td>
+                            <td>獲選 SPIE Fellow</td>
+                        </tr>
+                        <tr>
+                            <td>2012</td>
+                            <td>獲國科會傑出技術移轉貢獻獎</td>
+                        </tr>
+                        <tr>
+                            <td>2013</td>
+                            <td>獲國科會傑出研究獎</td>
+                        </tr>
+                        <tr>
+                            <td>2015</td>
+                            <td>獲潘文淵文教基金會研究傑出獎</td>
+                        </tr>
+                        <tr>
+                            <td>2016、2019</td>
+                            <td>獲科技部特約研究計畫</td>
+                        </tr>
+                        <tr>
+                            <td>2020</td>
+                            <td>獲中國電機工程學會電機工程獎章</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+       <div >Website crafted by Bill Chen · Last updated: 2025/11/05
+</div>
+</body>
+</html>
+

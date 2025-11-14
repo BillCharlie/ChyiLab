@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>研究計劃 - 教授個人網站</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --bg: #020617;
+            --bg-card: #020819;
+            --bg-soft: #0b1120;
+            --border-subtle: #1f2937;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56,189,248,0.12);
+            --text-main: #e5e7eb;
+            --text-muted: #9ca3af;
+            --heading: #f9fafb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         "Noto Sans TC", "PingFang TC", sans-serif;
+            background:
+                radial-gradient(circle at 0% 0%, #1d2a41 0, transparent 50%),
+                radial-gradient(circle at 100% 0%, #0b1120 0, transparent 55%),
+                linear-gradient(160deg, #020617 0%, #020617 60%, #020617 100%);
+            color: var(--text-main);
+            line-height: 1.75;
+        }
+
+        /* --------------- 導覽列 --------------- */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(15,23,42,0.96);
+            border-bottom: 1px solid var(--border-subtle);
+            backdrop-filter: blur(10px);
+        }
+
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 10px 18px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px 20px;
+            justify-content: space-between;
+        }
+
+        nav .nav-title {
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        nav .nav-links {
+            flex: 1;
+            text-align: right;
+            font-size: 0.9rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 4px 8px;
+            margin: 0 2px;
+            border-radius: 999px;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+        }
+
+        nav a:hover {
+            background: var(--accent-soft);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        /* --------------- 內容框架 --------------- */
+        .page-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 18px 56px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 0.8rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin: 4px 0 4px;
+            font-size: 1.8rem;
+            color: var(--heading);
+        }
+
+        .subtitle {
+            margin: 0 0 14px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .intro-text {
+            margin: 0 0 20px;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        /* --------------- 共用 section --------------- */
+        .section {
+            margin-top: 18px;
+            padding: 22px 24px 20px;
+            border-radius: 18px;
+            background: rgba(15,23,42,0.9);
+            border: 1px solid rgba(51,65,85,0.9);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 1.05rem;
+            color: var(--heading);
+            border-left: 3px solid var(--accent);
+            padding-left: 10px;
+        }
+
+        .section-note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* --------------- 篩選列 --------------- */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px 16px;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+        }
+
+        .filter-label {
+            color: var(--text-muted);
+        }
+
+        #keywordInput {
+            flex: 1;
+            min-width: 180px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(75,85,99,0.9);
+            background: rgba(15,23,42,0.9);
+            color: var(--text-main);
+            font-size: 0.88rem;
+        }
+
+        #keywordInput:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 1px rgba(56,189,248,0.5);
+        }
+
+        .filter-hint {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        /* --------------- 年度群組折疊 --------------- */
+        .year-group {
+            margin-top: 10px;
+            border-radius: 14px;
+            border: 1px solid rgba(31,41,55,0.95);
+            background: rgba(15,23,42,0.9);
+            overflow: hidden;
+        }
+
+        .year-header {
+            width: 100%;
+            padding: 8px 14px;
+            background: linear-gradient(90deg, #020617, #0b1120);
+            border: none;
+            color: var(--heading);
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .year-header-left {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .year-label {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .year-count {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .year-header-right {
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+
+        .year-body {
+            padding: 0 0 4px;
+        }
+
+        .year-group.collapsed .year-body {
+            display: none;
+        }
+
+        .chevron {
+            display: inline-block;
+            transition: transform 0.18s ease;
+        }
+
+        .year-group.collapsed .chevron {
+            transform: rotate(-90deg);
+        }
+
+        /* --------------- 表格樣式 --------------- */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.86rem;
+            min-width: 480px;
+        }
+
+        table.data-table th,
+        table.data-table td {
+            padding: 7px 9px;
+            border-bottom: 1px solid rgba(31,41,55,0.95);
+            vertical-align: top;
+        }
+
+        table.data-table th {
+            text-align: left;
+            font-weight: 600;
+            background: linear-gradient(90deg, rgba(15,23,42,1), rgba(30,64,175,0.65));
+            color: #e5e7eb;
+            border-bottom: 1px solid #1d4ed8;
+            white-space: nowrap;
+        }
+
+        table.data-table tbody tr:nth-child(even) {
+            background: rgba(15,23,42,0.85);
+        }
+
+        table.data-table tbody tr:nth-child(odd) {
+            background: rgba(15,23,42,0.6);
+        }
+
+        table.data-table tbody tr:hover {
+            background: rgba(30,64,175,0.35);
+        }
+
+        /* --------------- 搜尋無結果 --------------- */
+        .no-result {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: none;
+        }
+
+        /* --------------- RWD --------------- */
+        @media (max-width: 800px) {
+            nav .nav-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav .nav-links {
+                text-align: left;
+                width: 100%;
+                line-height: 1.6;
+            }
+
+            .section {
+                padding: 18px 16px;
+            }
+
+            table.data-table {
+                font-size: 0.82rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 導覽列 -->
+    <nav>
+        <div class="nav-inner">
+            <div class="nav-title">Prof. Jen-Inn Chyi · Lab</div>
+            <div class="nav-links">
+                <a href="index.html">首頁</a>
+                <a href="professor.html">教授簡介</a>
+                <a href="research.html">研究計劃</a>
+                <a href="team.html">研究團隊</a>
+                <a href="achievements.html">研究成果</a>
+                <a href="publications.html">論文發表</a>
+                <a href="courses.html">開課內容</a>
+                <a href="equipment.html">實驗設備</a>
+                <a href="life.html">生活剪映</a>
+                <a href="links.html">相關連結</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <header>
+            <span class="eyebrow">Research Projects</span>
+            <h1>研究計劃</h1>
+            <p class="subtitle">主要產學合作與國科會／科技部計畫 · 依年度由新到舊排列</p>
+            <p class="intro-text">
+                下列為綦振瀛教授近年主持或參與之部分主要研究計畫，涵蓋 GaN 功率元件、
+                III-V 高速元件、光電及奈米結構等主題。可透過關鍵字搜尋特定技術、
+                合作廠商或補助單位，並用年度折疊檢視。
+            </p>
+        </header>
+
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">研究計畫列表</h2>
+                <div class="section-note">輸入關鍵字篩選 · 點選每一年度列可展開 / 收合</div>
+            </div>
+
+            <div class="filter-bar">
+                <span class="filter-label">關鍵字搜尋：</span>
+                <input id="keywordInput" type="text" placeholder="例如：GaN、台達電、博士後、LED、InAlGaN…" />
+                <div class="filter-hint">搜尋範圍包含「計畫名稱」、「委託單位」、「執行單位」。</div>
+            </div>
+
+            <div id="noResult" class="no-result">目前沒有符合搜尋條件的計畫。</div>
+
+            <div id="projectContainer">
+                <!-- 110 年 -->
+                <div class="year-group open" data-year="110" data-default-open="true">
+                    <button class="year-header" type="button">
+                        <div class="year-header-left">
+                            <span class="year-label">110 年度</span>
+                            <span class="year-count">4 件計畫</span>
+                        </div>
+                        <div class="year-header-right">
+                            <span class="chevron">▾</span>
+                        </div>
+                    </button>
+                    <div class="year-body">
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>計畫名稱</th>
+                                        <th>委託單位</th>
+                                        <th>執行單位</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="project-row">
+                                        <td>應用於 GaN 高頻元件之超薄厚度 Al(Ga,In)N 多元材料主動層技術開發技術</td>
+                                        <td>工研院</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>InAlGaN 四元化合物半導體之超高頻電晶體開發</td>
+                                        <td>工研院</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>高效率高頻高積體化轉換器研發－總計畫暨子計畫一：氮化鎵材料之磊晶開發和元件可靠度分析與模型建立 (2/2)</td>
+                                        <td>科技部</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>駱佳納－博士級研究人員－科技部補助延攬(聘)人才</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 109 年 -->
+                <div class="year-group open" data-year="109" data-default-open="true">
+                    <button class="year-header" type="button">
+                        <div class="year-header-left">
+                            <span class="year-label">109 年度</span>
+                            <span class="year-count">4 件計畫</span>
+                        </div>
+                        <div class="year-header-right">
+                            <span class="chevron">▾</span>
+                        </div>
+                    </button>
+                    <div class="year-body">
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>計畫名稱</th>
+                                        <th>委託單位</th>
+                                        <th>執行單位</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="project-row">
+                                        <td>氮化鎵磊晶技術與元件建模</td>
+                                        <td>隆達光電</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>高效率高頻高積體化轉換器研發－總計畫暨子計畫一：氮化鎵材料之磊晶開發和元件可靠度分析與模型建立 (1/2)</td>
+                                        <td>科技部</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>喬漢－博士級研究人員－科技部補助延攬(聘)人才</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>駱佳納－博士級研究人員－科技部補助延攬(聘)人才</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 108 年 -->
+                <div class="year-group collapsed" data-year="108" data-default-open="false">
+                    <button class="year-header" type="button">
+                        <div class="year-header-left">
+                            <span class="year-label">108 年度</span>
+                            <span class="year-count">6 件計畫</span>
+                        </div>
+                        <div class="year-header-right">
+                            <span class="chevron">▾</span>
+                        </div>
+                    </button>
+                    <div class="year-body">
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>計畫名稱</th>
+                                        <th>委託單位</th>
+                                        <th>執行單位</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="project-row">
+                                        <td>P 型氮化硼與氮化鋁鎵之整合研究</td>
+                                        <td>晶元光電</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>GaN/Si RF 元件研究計畫</td>
+                                        <td>聯穎光電</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>雙波段砷化銦/銻化鎵第二型超晶格紅外光偵測器之研製</td>
+                                        <td>中科院</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>高效率高頻高機體化轉換器研發－總計畫暨子計畫一：氮化鎵材料之磊晶開發和元件可靠度分析與模型建立 (2/2)</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>凡德瓦磊晶成長氮化鎵與其在電子元件之應用</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>駱佳納－博士後研究－科技部補助延攬(聘)人才</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 107 年 -->
+                <div class="year-group collapsed" data-year="107" data-default-open="false">
+                    <button class="year-header" type="button">
+                        <div class="year-header-left">
+                            <span class="year-label">107 年度</span>
+                            <span class="year-count">8 件計畫</span>
+                        </div>
+                        <div class="year-header-right">
+                            <span class="chevron">▾</span>
+                        </div>
+                    </button>
+                    <div class="year-body">
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>計畫名稱</th>
+                                        <th>委託單位</th>
+                                        <th>執行單位</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="project-row">
+                                        <td>捷苙科技暨中央大學產學合作研究計畫</td>
+                                        <td>捷苙科技</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>氮化鎵異質接面場效電晶體之短路與閘極偏壓能力研究</td>
+                                        <td>台達電</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>高效率高頻高機體化轉換器研發－總計畫暨子計畫一：氮化鎵材料之磊晶開發和元件可靠度分析與模型建立 (1/2)</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>國際產學聯盟計畫－智慧健康照護與疾病預防國際產學聯盟</td>
+                                        <td>科技部</td>
+                                        <td>研發處</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>氮化硼鋁鎵銦異質結構磊晶與特性研究</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>大專學生參與專題研究計畫－氮化鋁銦/氮化鋁/氮化鎵高電子遷移率電晶體位障層鋁含量對閘極漏電流之影響</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>駱佳納－博士後研究－科技部補助延攬(聘)人才</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>國立中央大學－國際產學聯盟計畫 II</td>
+                                        <td>科技部</td>
+                                        <td>研發處</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 106 年 -->
+                <div class="year-group collapsed" data-year="106" data-default-open="false">
+                    <button class="year-header" type="button">
+                        <div class="year-header-left">
+                            <span class="year-label">106 年度</span>
+                            <span class="year-count">6 件計畫</span>
+                        </div>
+                        <div class="year-header-right">
+                            <span class="chevron">▾</span>
+                        </div>
+                    </button>
+                    <div class="year-body">
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>計畫名稱</th>
+                                        <th>委託單位</th>
+                                        <th>執行單位</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="project-row">
+                                        <td>氮化鎵異質接面場效電晶體之直流與動態電性研究</td>
+                                        <td>台達電</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>氮化硼與氮化鋁鎵之整合與融合研究以應用於功率元件</td>
+                                        <td>晶元光電</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>國際產學聯盟計畫－智慧健康照護與疾病預防國際產學聯盟 I</td>
+                                        <td>科技部</td>
+                                        <td>研發處</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>安德烈－博士後研究－國科會補助延攬(聘)人才</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>尼洛齊－博士後研究－國科會補助延攬(聘)人才</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>GaN on Si 晶圓之奈米強化技術與磊晶驗證 (2/2)</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 105 年 -->
+                <div class="year-group collapsed" data-year="105" data-default-open="false">
+                    <button class="year-header" type="button">
+                        <div class="year-header-left">
+                            <span class="year-label">105 年度</span>
+                            <span class="year-count">5 件計畫</span>
+                        </div>
+                        <div class="year-header-right">
+                            <span class="chevron">▾</span>
+                        </div>
+                    </button>
+                    <div class="year-body">
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>計畫名稱</th>
+                                        <th>委託單位</th>
+                                        <th>執行單位</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="project-row">
+                                        <td>低通道電阻氮化鎵場效電晶體之研製</td>
+                                        <td>台達電</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>政府科技發展計畫資通電子群組規劃、審議及管考研究計畫</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>產學合作計畫－低通道電阻氮化鋁銦場效電晶體之研製 (2/2)</td>
+                                        <td>科技部</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>適用於毫米波功率放大器之高功率氮化鋁銦/氮化鎵高電子遷移率電晶體開發</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>GaN on Si 晶圓之奈米強化技術與磊晶驗證 (1/2)</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 104 年 -->
+                <div class="year-group collapsed" data-year="104" data-default-open="false">
+                    <button class="year-header" type="button">
+                        <div class="year-header-left">
+                            <span class="year-label">104 年度</span>
+                            <span class="year-count">6 件計畫</span>
+                        </div>
+                        <div class="year-header-right">
+                            <span class="chevron">▾</span>
+                        </div>
+                    </button>
+                    <div class="year-body">
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>計畫名稱</th>
+                                        <th>委託單位</th>
+                                        <th>執行單位</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="project-row">
+                                        <td>產學合作計畫－低通道電阻氮化鋁銦場效電晶體之研製 (1/2)</td>
+                                        <td>台達電</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>政府科技發展計畫資通訊建設群組規劃、審議及管考研究計畫 (II)</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>產學合作計畫－低通道電阻氮化鋁銦場效電晶體之研製 (1/2)</td>
+                                        <td>科技部</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>單石異質整合 n 型砷化銦鎵與 p 型鍺通道互補式金氧半鰭式場效電晶體</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>104 年度大專學生參與專題研究計畫：Metal/AlO/GaN 結構電容－電壓量測與界面缺陷分析</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>陳政佑－博士後研究－國科會補助延攬(聘)人才</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 103 年 -->
+                <div class="year-group collapsed" data-year="103" data-default-open="false">
+                    <button class="year-header" type="button">
+                        <div class="year-header-left">
+                            <span class="year-label">103 年度</span>
+                            <span class="year-count">6 件計畫</span>
+                        </div>
+                        <div class="year-header-right">
+                            <span class="chevron">▾</span>
+                        </div>
+                    </button>
+                    <div class="year-body">
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>計畫名稱</th>
+                                        <th>委託單位</th>
+                                        <th>執行單位</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="project-row">
+                                        <td>矽基板上高功率氮化鎵蕭基二極體之研製</td>
+                                        <td>(台達電捐贈) 教育部邁向頂尖大學計畫</td>
+                                        <td>台達中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>矽基板上高功率氮化鎵蕭基二極體之研製</td>
+                                        <td>台達電</td>
+                                        <td>台達中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>產學合作計畫－成長於 6 吋矽基板之氮化鎵功率元件 (3/3)</td>
+                                        <td>台達電</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>政府科技發展計畫資通訊建設群組規劃、審議及管考研究計畫</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>產學合作計畫－成長於 6 吋矽基板之氮化鎵功率元件 (3/3)</td>
+                                        <td>科技部</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>陳政佑－博士後研究－國科會補助延攬(聘)人才</td>
+                                        <td>科技部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 102 年 -->
+                <div class="year-group collapsed" data-year="102" data-default-open="false">
+                    <button class="year-header" type="button">
+                        <div class="year-header-left">
+                            <span class="year-label">102 年度</span>
+                            <span class="year-count">5 件計畫</span>
+                        </div>
+                        <div class="year-header-right">
+                            <span class="chevron">▾</span>
+                        </div>
+                    </button>
+                    <div class="year-body">
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>計畫名稱</th>
+                                        <th>委託單位</th>
+                                        <th>執行單位</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="project-row">
+                                        <td>製作於矽基板上之高功率常關型氮化鎵電晶體</td>
+                                        <td>(台達電捐贈) 教育部邁向頂尖大學計畫</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>製作於矽基板上之高功率常關型氮化鎵電晶體</td>
+                                        <td>台達電</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>產學合作計畫－成長於 6 吋矽基板之氮化鎵功率元件 (2/3)</td>
+                                        <td>台達電</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>政府科技發展計畫資通訊建設群組規劃、審議及管考研究計畫</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>產學合作計畫－成長於 6 吋矽基板之氮化鎵功率元件 (2/3)</td>
+                                        <td>國科會</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 101 年 -->
+                <div class="year-group collapsed" data-year="101" data-default-open="false">
+                    <button class="year-header" type="button">
+                        <div class="year-header-left">
+                            <span class="year-label">101 年度</span>
+                            <span class="year-count">9 件計畫</span>
+                        </div>
+                        <div class="year-header-right">
+                            <span class="chevron">▾</span>
+                        </div>
+                    </button>
+                    <div class="year-body">
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>計畫名稱</th>
+                                        <th>委託單位</th>
+                                        <th>執行單位</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="project-row">
+                                        <td>矽基板上高功率氮化鎵蕭基二極體之研製</td>
+                                        <td>(台達電捐贈) 教育部邁向頂尖大學計畫</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>製作於矽基板上之高功率氮化鎵蕭基二極體與常關型氮化鎵電晶體</td>
+                                        <td>台達電</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>產學合作計畫－成長於 6 吋矽基板之氮化鎵功率元件 (1/3)</td>
+                                        <td>台達電</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>Growth and Fabrication of High Hole Mobility InGaSb Field Effect Transistors on Silicon Substrate for Low-Power High-Speed Logic Application</td>
+                                        <td>台積電</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>氧化物太陽電池磊晶技術開發</td>
+                                        <td>國科會</td>
+                                        <td>原能會 / 電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>能源國家型科技計畫照明與電器子項推動及管理計畫 (III)</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>產學合作計畫－成長於 6 吋矽基板之氮化鎵功率元件 (1/3)</td>
+                                        <td>國科會</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>整合於矽基板上之高遷移率三五族互補式金氧半鰭式場效電晶體</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>應用於深紫外光發光二極體之高品質氮化鋁薄膜技術開發</td>
+                                        <td>工研院</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 100 年 -->
+                <div class="year-group collapsed" data-year="100" data-default-open="false">
+                    <button class="year-header" type="button">
+                        <div class="year-header-left">
+                            <span class="year-label">100 年度</span>
+                            <span class="year-count">8 件計畫</span>
+                        </div>
+                        <div class="year-header-right">
+                            <span class="chevron">▾</span>
+                        </div>
+                    </button>
+                    <div class="year-body">
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>計畫名稱</th>
+                                        <th>委託單位</th>
+                                        <th>執行單位</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="project-row">
+                                        <td>矽基板上高功率氮化鎵蕭基二極體之研製</td>
+                                        <td>台達電</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>氮化物半導體材料之成長方法</td>
+                                        <td>泰谷光電</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>常關型氮化鎵功率電晶體與垂直式蕭基二極體之開發研究</td>
+                                        <td>廣鎵光電</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>GaN-on-Si 前瞻性白光 LED 暨 AC LED 積體化蕭基二極體技術</td>
+                                        <td>工研院</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>氧化物太陽電池磊晶技術開發</td>
+                                        <td>國科會</td>
+                                        <td>原能會 / 電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>推動能源國家型科技計畫照明 100 年策略規劃</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>科學園區 LED 路燈試點計畫</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>GaN-on-Si 前瞻性白光 LED 技術開發</td>
+                                        <td>工研院</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 99 年 -->
+                <div class="year-group collapsed" data-year="99" data-default-open="false">
+                    <button class="year-header" type="button">
+                        <div class="year-header-left">
+                            <span class="year-label">99 年度</span>
+                            <span class="year-count">11 件計畫</span>
+                        </div>
+                        <div class="year-header-right">
+                            <span class="chevron">▾</span>
+                        </div>
+                    </button>
+                    <div class="year-body">
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>計畫名稱</th>
+                                        <th>委託單位</th>
+                                        <th>執行單位</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="project-row">
+                                        <td>氮化鎵基板之製備與高功率氮化鎵整流二極體之研製 (3/3)</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>SAW Duplexer SW</td>
+                                        <td>乾坤科技</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>GaN Technology Development Program</td>
+                                        <td>穩懋半導體</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>平行化高速光連接技術開發四年計畫第 2 期計畫 (4/4)</td>
+                                        <td>經濟部</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>太陽電池磊晶技術開發</td>
+                                        <td>核研所</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>AC LED 積體化蕭基二極體之研究</td>
+                                        <td>工研院</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>GaN-on-Si 前瞻性白光 LED (III)</td>
+                                        <td>工研院</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>異質整合奈米電晶體之研製 (3/3)</td>
+                                        <td>台積電</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>推動能源國家型科技計畫照明與電器及淨煤、捕碳、儲碳之策略規劃</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>產學合作計畫－異質整合奈米電晶體之研製 (3/3)</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>歐盟 FP7 嘗試參與計畫：具有低電阻 Type-II 穿隧接面之高速垂直共振腔面射型雷射</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 98 年 -->
+                <div class="year-group collapsed" data-year="98" data-default-open="false">
+                    <button class="year-header" type="button">
+                        <div class="year-header-left">
+                            <span class="year-label">98 年度</span>
+                            <span class="year-count">9 件計畫</span>
+                        </div>
+                        <div class="year-header-right">
+                            <span class="chevron">▾</span>
+                        </div>
+                    </button>
+                    <div class="year-body">
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>計畫名稱</th>
+                                        <th>委託單位</th>
+                                        <th>執行單位</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="project-row">
+                                        <td>產學合作計畫－異質整合奈米電晶體之研製 (2/3)</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>平行化高速光連接技術開發四年計畫第 2 期計畫 (3/4)</td>
+                                        <td>經濟部</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>氧化物太陽能電池材料研究</td>
+                                        <td>核研所</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>GaN-on-Si 前瞻性白光 LED (II)</td>
+                                        <td>工研院</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>高功率 GaN-based LED 量測分析及結構設計</td>
+                                        <td>泰谷光電</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>LED 磊晶專利之分析與研究</td>
+                                        <td>工研院</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>異質整合奈米電晶體之研製 (2/3)</td>
+                                        <td>台積電</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>兆赫銻砷化銦鎵/磷化銦異質接面雙極性電晶體之技術開發</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>氮化鎵基板之製備與高功率氮化鎵整流二極體之研製 (2/3)</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 97 年 -->
+                <div class="year-group collapsed" data-year="97" data-default-open="false">
+                    <button class="year-header" type="button">
+                        <div class="year-header-left">
+                            <span class="year-label">97 年度</span>
+                            <span class="year-count">12 件計畫</span>
+                        </div>
+                        <div class="year-header-right">
+                            <span class="chevron">▾</span>
+                        </div>
+                    </button>
+                    <div class="year-body">
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>計畫名稱</th>
+                                        <th>委託單位</th>
+                                        <th>執行單位</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="project-row">
+                                        <td>Nitride Semiconductor Light Emitting Diodes</td>
+                                        <td>友達光電</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>GaN-on-Si 前瞻性白光 LED (II)</td>
+                                        <td>工研院</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>政府科技計畫產業科技群組(電子、光電)規劃、審議及管考研究計畫</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>Sb-Based HFETs on Si Substrate for Low-Power High-Frequency Logic Application</td>
+                                        <td>台積電</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>氮化物與氧化物半導體奈米結構之製備與應用 (3/3)</td>
+                                        <td>國科會</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>氮化鎵基板之製備與高功率氮化鎵整流二極體之研製 (1/3)</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>平行化高速光連接技術開發四年計畫第 2 期計畫 (2/4)</td>
+                                        <td>經濟部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>高功率、高效率大面積 GaN-based LED</td>
+                                        <td>泰谷光電</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>High-Power GaN RF HFETs for S-band Applications</td>
+                                        <td>穩懋半導體</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>異質整合奈米電晶體之研製 (1/3)</td>
+                                        <td>台積電</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>先導型產學合作計畫－異質整合奈米電晶體之研製 (1/3)</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>九十七年度大專學生參與專題研究計畫－應用於太陽能電池中砷化銦/銻砷化鎵 (InAs/GaAsSb) 第二型 (type II) 量子點光電特性之研究</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>九十七年度大專學生參與專題研究計畫－AlGaN/GaN 蕭基特二極體之逆向潰特性研究</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 96 年 -->
+                <div class="year-group collapsed" data-year="96" data-default-open="false">
+                    <button class="year-header" type="button">
+                        <div class="year-header-left">
+                            <span class="year-label">96 年度</span>
+                            <span class="year-count">7 件計畫</span>
+                        </div>
+                        <div class="year-header-right">
+                            <span class="chevron">▾</span>
+                        </div>
+                    </button>
+                    <div class="year-body">
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>計畫名稱</th>
+                                        <th>委託單位</th>
+                                        <th>執行單位</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="project-row">
+                                        <td>高品質氮化鋁鎵基板製作技術之研究</td>
+                                        <td>工研院</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>氮化鎵蕭特基二極體之研製</td>
+                                        <td>台灣通用</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>平行化高速光連接技術開發四年計畫第 2 期計畫 (1/4)</td>
+                                        <td>經濟部</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>政府科技計畫產業科技群組(電子、光電)規劃、審議及管考研究計畫</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>氮化物與氧化物半導體奈米結構之製備與應用 (2/3)</td>
+                                        <td>國科會</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>平行化高速光連接技術開發計畫第 2 期﹝I﹞</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>氮化鎵基板之製備與高功率氮化鎵整流二極體之研製 (1/3)</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 95 年 -->
+                <div class="year-group collapsed" data-year="95" data-default-open="false">
+                    <button class="year-header" type="button">
+                        <div class="year-header-left">
+                            <span class="year-label">95 年度</span>
+                            <span class="year-count">5 件計畫</span>
+                        </div>
+                        <div class="year-header-right">
+                            <span class="chevron">▾</span>
+                        </div>
+                    </button>
+                    <div class="year-body">
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>計畫名稱</th>
+                                        <th>委託單位</th>
+                                        <th>執行單位</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="project-row">
+                                        <td>氮化鎵蕭特基二極體之研製</td>
+                                        <td>台灣通用</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>以有機金屬氣相磊晶法成長氮化鎵奈米柱之技術開發</td>
+                                        <td>工研院</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>LED 技術文獻分析－LED 元件</td>
+                                        <td>工研院</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>氮化物與氧化物半導體奈米結構之製備與應用 (1/3)</td>
+                                        <td>國科會</td>
+                                        <td>光電中心</td>
+                                    </tr>
+                                    <tr class="project-row">
+                                        <td>半導體奈米光電元件研究 (3/3)</td>
+                                        <td>國科會</td>
+                                        <td>電機系</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- projectContainer -->
+        </section>
+    </div>
+
+    <script>
+        // 年度折疊
+        document.querySelectorAll('.year-group').forEach(function(group) {
+            var header = group.querySelector('.year-header');
+            header.addEventListener('click', function() {
+                // 若目前有搜尋關鍵字，就保持全部展開，不讓點擊影響搜尋狀態
+                var keyword = document.getElementById('keywordInput').value.trim();
+                if (keyword.length > 0) return;
+
+                group.classList.toggle('collapsed');
+            });
+        });
+
+        // 關鍵字篩選
+        (function() {
+            var input = document.getElementById('keywordInput');
+            var noResult = document.getElementById('noResult');
+            var groups = Array.prototype.slice.call(
+                document.querySelectorAll('.year-group')
+            );
+
+            input.addEventListener('input', function() {
+                var keyword = input.value.trim().toLowerCase();
+                var anyVisible = false;
+
+                if (keyword.length === 0) {
+                    // 恢復預設折疊狀態與顯示
+                    groups.forEach(function(group) {
+                        group.style.display = '';
+                        var rows = group.querySelectorAll('.project-row');
+                        rows.forEach(function(row) {
+                            row.style.display = '';
+                        });
+
+                        var defOpen = group.getAttribute('data-default-open') === 'true';
+                        if (defOpen) {
+                            group.classList.remove('collapsed');
+                        } else {
+                            group.classList.add('collapsed');
+                        }
+                    });
+                    noResult.style.display = 'none';
+                    return;
+                }
+
+                // 有輸入關鍵字時：全部展開，並依關鍵字過濾
+                groups.forEach(function(group) {
+                    var rows = Array.prototype.slice.call(
+                        group.querySelectorAll('.project-row')
+                    );
+                    var groupHasMatch = false;
+
+                    rows.forEach(function(row) {
+                        var text = row.textContent.toLowerCase();
+                        if (text.indexOf(keyword) !== -1) {
+                            row.style.display = '';
+                            groupHasMatch = true;
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+
+                    if (groupHasMatch) {
+                        group.style.display = '';
+                        group.classList.remove('collapsed'); // 展開以顯示結果
+                        anyVisible = true;
+                    } else {
+                        group.style.display = 'none';
+                    }
+                });
+
+                noResult.style.display = anyVisible ? 'none' : 'block';
+            });
+        })();
+    </script>
+       <div >Website crafted by Bill Chen · Last updated: 2025/11/05
+</div>
+</body>
+</html>

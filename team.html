@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>研究團隊 - 教授個人網站</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --bg: #020617;
+            --bg-card: #020819;
+            --bg-soft: #0b1120;
+            --border-subtle: #1f2937;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56,189,248,0.12);
+            --text-main: #e5e7eb;
+            --text-muted: #9ca3af;
+            --heading: #f9fafb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         "Noto Sans TC", "PingFang TC", sans-serif;
+            background:
+                radial-gradient(circle at 0% 0%, #1d2a41 0, transparent 50%),
+                radial-gradient(circle at 100% 0%, #0b1120 0, transparent 55%),
+                linear-gradient(160deg, #020617 0%, #020617 60%, #020617 100%);
+            color: var(--text-main);
+            line-height: 1.75;
+        }
+
+
+        /* --------------- 導覽列 --------------- */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(15,23,42,0.96);
+            border-bottom: 1px solid var(--border-subtle);
+            backdrop-filter: blur(10px);
+        }
+
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 10px 18px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px 20px;
+            justify-content: space-between;
+        }
+
+        nav .nav-title {
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        nav .nav-links {
+            flex: 1;
+            text-align: right;
+            font-size: 0.9rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 4px 8px;
+            margin: 0 2px;
+            border-radius: 999px;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+        }
+
+        nav a:hover {
+            background: var(--accent-soft);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        /* --------------- 內容框架 --------------- */
+        .page-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 18px 56px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 0.8rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin: 4px 0 4px;
+            font-size: 1.8rem;
+            color: var(--heading);
+        }
+
+        .subtitle {
+            margin: 0 0 14px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .intro-text {
+            margin: 0 0 20px;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        /* --------------- 共用 section --------------- */
+        .section {
+            margin-top: 18px;
+            padding: 22px 24px 20px;
+            border-radius: 18px;
+            background: rgba(15,23,42,0.9);
+            border: 1px solid rgba(51,65,85,0.9);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 1.05rem;
+            color: var(--heading);
+            border-left: 3px solid var(--accent);
+            padding-left: 10px;
+        }
+
+        .section-note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* --------------- Team 專用：成員表格 --------------- */
+        .member-table-wrap {
+            overflow-x: auto;
+            margin-top: 6px;
+        }
+
+        table.member-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            min-width: 460px;
+        }
+
+        .member-table thead {
+            background: #020617;
+        }
+
+        .member-table th,
+        .member-table td {
+            padding: 6px 8px;
+            border-bottom: 1px solid rgba(31,41,55,0.9);
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .member-table th {
+            font-weight: 600;
+            color: var(--heading);
+        }
+
+        .member-table tbody tr:nth-child(even) td {
+            background: rgba(15,23,42,0.92);
+        }
+
+        .member-photo-placeholder {
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            border: 1px dashed rgba(148,163,184,0.8);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .member-name {
+            font-weight: 600;
+        }
+
+        .member-role {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .member-email {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.84rem;
+        }
+
+        .member-email:hover {
+            text-decoration: underline;
+        }
+
+        .member-hint {
+            margin-top: 6px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* --------------- Team 專用：代表案例卡片 --------------- */
+        .example-card {
+            margin-top: 10px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px dashed rgba(148,163,184,0.85);
+            background: radial-gradient(circle at 0% 0%, rgba(56,189,248,0.16), transparent 65%);
+            font-size: 0.82rem;
+        }
+
+        .example-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .example-title {
+            margin: 4px 0 4px;
+            font-size: 0.9rem;
+            color: var(--heading);
+        }
+
+        .example-meta {
+            margin: 0;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* --------------- 畢業生：年份折疊列表 --------------- */
+        .alumni-intro {
+            font-size: 0.86rem;
+            color: var(--text-muted);
+            margin: 0 0 10px;
+        }
+
+        .grad-years-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        details.grad-year {
+            border-radius: 14px;
+            border: 1px solid rgba(55,65,81,0.95);
+            background: rgba(15,23,42,0.92);
+            padding: 6px 10px 6px;
+        }
+
+        details.grad-year summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        details.grad-year summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .grad-year-label {
+            font-weight: 600;
+            color: var(--heading);
+            font-size: 0.92rem;
+        }
+
+        .grad-year-count {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .grad-year-arrow {
+            font-size: 0.8rem;
+            color: var(--accent);
+            transition: transform 0.18s ease;
+        }
+
+        details[open] .grad-year-arrow {
+            transform: rotate(90deg);
+        }
+
+        .grad-list {
+            list-style: none;
+            margin: 6px 0 0;
+            padding-left: 2px;
+            font-size: 0.83rem;
+        }
+
+        .grad-item {
+            padding: 4px 0;
+            border-top: 1px dashed rgba(31,41,55,0.9);
+        }
+
+        .grad-item:first-child {
+            border-top: none;
+        }
+
+        .grad-degree {
+            display: inline-block;
+            min-width: 2.2em;
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 0.82rem;
+        }
+
+        .grad-name {
+            font-weight: 600;
+            margin-right: 4px;
+        }
+
+        .grad-topic {
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 800px) {
+            nav .nav-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav .nav-links {
+                text-align: left;
+                width: 100%;
+                line-height: 1.6;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 導覽列 -->
+    <nav>
+        <div class="nav-inner">
+            <div class="nav-title">Prof. Jen-Inn Chyi · Lab</div>
+            <div class="nav-links">
+                <a href="index.html">首頁</a>
+                <a href="professor.html">教授簡介</a>
+                <a href="research.html">研究計劃</a>
+                <a href="team.html">研究團隊</a>
+                <a href="achievements.html">研究成果</a>
+                <a href="publications.html">論文發表</a>
+                <a href="courses.html">開課內容</a>
+                <a href="equipment.html">實驗設備</a>
+                <a href="life.html">生活剪映</a>
+                <a href="links.html">相關連結</a>
+            </div>
+        </div>
+    </nav>
+
+<div class="page-wrapper">
+
+    <span class="eyebrow">RESEARCH TEAM</span>
+    <h1 class="page-title">研究團隊</h1>
+    <p class="page-subtitle">
+        實驗室圍繞 <strong>III-V / III-N 化合物半導體</strong>，
+        目前分為 <strong>TCAD 元件模擬與製程</strong>、<strong>MOCVD</strong>、
+        <strong>MBE</strong> 三大技術軸線，並累積自 81 年起跨越
+        HBT / HEMT / LED / Laser / 功率元件的完整畢業生系譜。
+    </p>
+
+    <!-- Hero 簡短說明 -->
+    <section class="hero">
+        <p class="hero-text">
+            本頁面提供實驗室現有團隊編制與歷屆畢業生名單。TCAD 與製程組負責
+            元件設計、極化與收斂性分析；MOCVD 與 MBE 組則專注於 III-N / III-V
+            之磊晶成長與材料特性。下方表格的人員目前僅先保留一列模板，方便之後
+            於靜態網頁中直接新增成員；畢業生名單則以「年度折疊」方式呈現。
+        </p>
+        <div class="hero-meta-row">
+            <span class="hero-tag">GaN / InP / InAs-GaSb</span>
+            <span class="hero-tag">HEMT · HBT · LED · Laser</span>
+            <span class="hero-tag">Power & RF Devices</span>
+        </div>
+    </section>
+
+    <!-- TCAD & 製程 -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-title">元件模擬與製程</div>
+            <div class="section-note">
+                使用Silvaco& Sentaurus完成2D/3D TCAD模擬並實際完成元件製程。
+            </div>
+        </div>
+
+        <div class="member-table-wrap">
+            <table class="member-table">
+                <thead>
+                    <tr>
+                        <th>照片</th>
+                        <th>姓名</th>
+                        <th>級別</th>
+                        <th>分機</th>
+                        <th>E-mail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><div class="member-photo-placeholder">Photo</div></td>
+                        <td>
+                            <div class="member-name">（待新增）</div>
+                            <div class="member-role">TCAD / 製程模擬</div>
+                        </td>
+                        <td>博士生</td>
+                        <td>Ext. XXXX</td>
+                        <td><a class="member-email" href="mailto:someone@ncu.edu.tw">someone@ncu.edu.tw</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="member-hint">※ 未來新增人員時，複製此列並填入照片、姓名、級別與聯絡資訊即可。</div>
+        </div>
+
+        <div class="example-card">
+            <div class="example-label">代表案例</div>
+            <div class="example-title">傳統 Schottky gate GaN HEMT，p-GaN gate HEMT，Tri-gate GaN，MIS GaN HEMT</div>
+            <p class="example-meta">
+                內容包含GaN元件設計，製程開發與整合，靜態動態量測。
+            </p>
+        </div>
+    </section>
+
+    <!-- MOCVD -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-title">MOCVD 成長團隊</div>
+            <div class="section-note">
+                主要進行 GaN / InGaN / AlGaN 於 Si / Sapphire / SiC 之磊晶與材料分析。
+            </div>
+        </div>
+
+        <div class="member-table-wrap">
+            <table class="member-table">
+                <thead>
+                <tr>
+                    <th>照片</th>
+                    <th>姓名</th>
+                    <th>級別</th>
+                    <th>分機</th>
+                    <th>E-mail</th>
+                </tr>
+                </thead>
+            <tbody>
+                <tr>
+                    <td><div class="member-photo-placeholder">Photo</div></td>
+                    <td>
+                        <div class="member-name">（待新增）</div>
+                        <div class="member-role">MOCVD / Epitaxy</div>
+                    </td>
+                    <td>碩士生</td>
+                    <td>Ext. XXXX</td>
+                    <td><a class="member-email" href="mailto:someone@ncu.edu.tw">someone@ncu.edu.tw</a></td>
+                </tr>
+            </tbody>
+            </table>
+            <div class="member-hint">※ 可依此表格格式新增 MOCVD 相關成員。</div>
+        </div>
+
+        <div class="example-card">
+            <div class="example-label">代表案例</div>
+            <div class="example-title">GaN-on-Si / GaN-on-Sapphire 高壓 HEMT 結構之磊晶設計</div>
+            <p class="example-meta">
+                涵蓋緩衝層設計、應力與翹曲控制、位錯密度抑制，及動態導通電阻
+                （dynamic Ron）與可靠度相關議題。
+            </p>
+        </div>
+    </section>
+
+    <!-- MBE -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-title">MBE 成長團隊</div>
+            <div class="section-note">
+                聚焦 InP / InAs / GaSb / 量子點 / 超晶格等結構與 HBT、IR 偵測器等元件。
+            </div>
+        </div>
+
+        <div class="member-table-wrap">
+            <table class="member-table">
+                <thead>
+                <tr>
+                    <th>照片</th>
+                    <th>姓名</th>
+                    <th>級別</th>
+                    <th>分機</th>
+                    <th>E-mail</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><div class="member-photo-placeholder">Photo</div></td>
+                    <td>
+                        <div class="member-name">（待新增）</div>
+                        <div class="member-role">MBE / Quantum Devices</div>
+                    </td>
+                    <td>博士生</td>
+                    <td>Ext. XXXX</td>
+                    <td><a class="member-email" href="mailto:someone@ncu.edu.tw">someone@ncu.edu.tw</a></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="member-hint">※ MBE 組日後可依此格式補齊成員名單。</div>
+        </div>
+
+        <div class="example-card">
+            <div class="example-label">代表案例</div>
+            <div class="example-title">InAs/GaSb Type-II 超晶格紅外光偵測器與高頻元件</div>
+            <p class="example-meta">
+                包含晶格與應變設計、能帶工程、歐姆接觸與高頻特性量測，以及與 HBT 結構之整合。
+            </p>
+        </div>
+    </section>
+
+    <!-- 歷屆畢業生 -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-title">歷屆畢業學生（按年度折疊）</div>
+        </div>
+        <p class="alumni-intro">
+            畢業學生依年度由近到遠排列，點選各年度可展開 / 收合詳細論文題目。
+            名單涵蓋 HBT / HEMT / LED / Laser / 功率元件與材料研究等主題。
+        </p>
+
+        <div class="grad-years-grid">
+            <!-- 109 年 -->
+            <details class="grad-year" open>
+                <summary>
+                    <span class="grad-year-label">109 年</span>
+                    <span class="grad-year-count">博士 1 · 碩士 5</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">辛耶兒</span>
+                        <span class="grad-topic">Epitaxy and characterization of III-nitride high electron mobility transistors on silicon for RF applications</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">郗靖加</span>
+                        <span class="grad-topic">P-型 GaN 閘極高電子遷移率電晶體之磊晶層設計與成長</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">張懷言</span>
+                        <span class="grad-topic">金屬-絕緣層-p 型氮化鎵增強型高電子遷移率電晶體之研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">柯尊傑</span>
+                        <span class="grad-topic">分子束磊晶成長 InAs/GaSb 第二型超晶格以應用於中紅外光偵測器</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">鄭儒宇</span>
+                        <span class="grad-topic">磊晶成長氮化鎵高電子遷移率電晶體結構於矽基板過程晶圓翹曲之研析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">陳暉宇</span>
+                        <span class="grad-topic">次微米 T 型閘極氮化鎵毫米波功率電晶體之製程與特性分析</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 108 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">108 年</span>
+                    <span class="grad-year-count">碩士 7</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">廖偉筑</span>
+                        <span class="grad-topic">矽基鍺模板上 N 通道砷化銦鎵及 P 通道鍺鰭式場效電晶體之研</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">胡庭玉</span>
+                        <span class="grad-topic">超晶格緩衝層對成長於矽基板氮化鎵高電子遷移率電晶體動態特性之影響</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">萬禹辰</span>
+                        <span class="grad-topic">氮化鋁銦鎵/氮化鎵毫米波功率電晶體之製作與特性分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">朱英皓</span>
+                        <span class="grad-topic">以漸變式氮化鋁鎵超晶格結構提升成長於矽基板上氮化鎵磊晶層之品質</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">呂翎華</span>
+                        <span class="grad-topic">異質整合共閘極 N 型砷化銦鎵與 P 型鍺鰭式場效電晶體於矽基板之研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">蔡禮仰</span>
+                        <span class="grad-topic">以 ASM-HEMT Model 建立氮化鋁鎵/氮化鎵高電子遷移率電晶體之模型</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">李健民</span>
+                        <span class="grad-topic">毫米波氮化鎵高電子遷移率電晶體之研製</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 107 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">107 年</span>
+                    <span class="grad-year-count">碩士 7</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">陳泰霖</span>
+                        <span class="grad-topic">選擇性磊晶成長砷化銦鎵與砷化銦鋁於奈米圖案化鍺模板</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">許善軍</span>
+                        <span class="grad-topic">於圖案化鍺模板上選擇性成長之砷化銦鎵鰭式場效電晶體研製</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">林恩碩</span>
+                        <span class="grad-topic">T 型閘極氮化鋁銦(鎵)/氮化鋁/氮化鎵高電子遷移率電晶體製作與特性分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">游荃岳</span>
+                        <span class="grad-topic">磊晶成長三族氮化物於六英吋矽基板與其材料特性分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">吳修銘</span>
+                        <span class="grad-topic">高功率 P 型氮化鎵閘極氮化鎵異質場效電晶體動態特性之研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">陳昱志</span>
+                        <span class="grad-topic">矽基氮化鎵高電子遷移率電晶體 通道層與緩衝層之成長與材料特性分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">劉宜臻</span>
+                        <span class="grad-topic">以 I-Line 光學微影法製作次微米氮化鎵高電子遷移率電晶體之研究</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 106 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">106 年</span>
+                    <span class="grad-year-count">博士 1 · 碩士 2</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">薛惟仁</span>
+                        <span class="grad-topic">砷化銦與銻化鎵金氧半電容之界面特性研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">陳妗仰</span>
+                        <span class="grad-topic">砷化銦鎵/銻砷化鎵第二型異質接面 P 通道穿隧場效電晶體之設計與模擬</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">鄒承翰</span>
+                        <span class="grad-topic">開發具鈦/鋁矽銅歐姆接觸之砷化銦鎵金氧半場效電晶體</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 105 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">105 年</span>
+                    <span class="grad-year-count">碩士 5</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">蘇冠華</span>
+                        <span class="grad-topic">經電漿處理之氧化鉿/氧化鋁/銻化鎵金氧半電容界面缺陷研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">潘幸璟</span>
+                        <span class="grad-topic">以氫氧化鉀蝕刻製程製作掘入式增強型氮化鋁銦/氮化鎵異質結構場效電晶體</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">張淳威</span>
+                        <span class="grad-topic">高功率氮化鎵異質場效電晶體動態特性之研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">李彥漳</span>
+                        <span class="grad-topic">以氮氣作為載氣改善有機金屬化學蒸氣沉積之氮化鋁銦/氮化鋁/氮化鎵異質結構傳輸特性</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">許乃蓉</span>
+                        <span class="grad-topic">鍺與砷化銦鎵鰭式場效電晶體共閘極製程之開發</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 104 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">104 年</span>
+                    <span class="grad-year-count">博士 1 · 碩士 7</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">李庚諺</span>
+                        <span class="grad-topic">氮化鋁鎵/氮化鎵蕭基二極體與氮化鋁銦/氮化鎵場效電晶體之磊晶成長、元件製作與特性探討</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">王柏翔</span>
+                        <span class="grad-topic">新型陽極蝕刻與氟離子處理於矽基板上之氮化鋁鎵/氮化鎵蕭基二極體</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">高維新</span>
+                        <span class="grad-topic">氮化鎵場效電晶體之動態特性與表面處理研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">陳季賢</span>
+                        <span class="grad-topic">磊晶成長氮化鋁銦/氮化鋁/氮化鎵異質結構於六吋矽基板與其特性探討</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">李佩佳</span>
+                        <span class="grad-topic">氧化鉿/氧化鋁/鍺與砷化銦鎵金氧半電容共閘極製程技術與界面缺陷之研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">何恭榜</span>
+                        <span class="grad-topic">利用電漿處理之氧化鉿/氧化鋁/砷化銦金氧半電容界面缺陷研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">吳治成</span>
+                        <span class="grad-topic">具高導通電流常關型銻砷化鎵/砷化銦鎵異質接面穿隧式場效電晶體之研究</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 103 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">103 年</span>
+                    <span class="grad-year-count">博士 2 · 碩士 7</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">邱培晉</span>
+                        <span class="grad-topic">分子束磊晶成長銻化物高遷移率電晶體</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">劉學興</span>
+                        <span class="grad-topic">氮化銦鎵/氮化鎵藍光發光二極體效率衰退現象之改善</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">鮑建佑</span>
+                        <span class="grad-topic">高崩潰電壓氮化鋁鎵/氮化鎵金屬-絕緣層-半導體場效電晶體之研製</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">林柏融</span>
+                        <span class="grad-topic">以有機金屬化學蒸氣沉積法成長氮化鋁薄膜及其材料特性研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">謝承軒</span>
+                        <span class="grad-topic">氧化鋁/砷化銦鰭式場效電晶體之製作與特性分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">凃柏璁</span>
+                        <span class="grad-topic">具氮化鎵表面披覆層之空乏型氮化鋁銦/氮化鎵場效電晶體之直流與動態特性研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">徐賢名</span>
+                        <span class="grad-topic">氧化鉿/氧化鋁/銻化鎵金氧半結構製備與界面缺陷之研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">林達</span>
+                        <span class="grad-topic">具穿隧結構之反向極化電場氮化銦鎵發光二極體</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 102 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">102 年</span>
+                    <span class="grad-year-count">博士 2 · 碩士 5</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">王聖瑜</span>
+                        <span class="grad-topic">次微米銻砷化銦鎵基極雙異質接面雙極性電晶體製程技術發展與特性分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">陳政佑</span>
+                        <span class="grad-topic">分子束磊晶成長氧化鋅系列材料與其特性分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">李孟傑</span>
+                        <span class="grad-topic">具反向壓電極化電場之氮化銦鎵/氮化鎵量子井發光二極體</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">鄭隆傑</span>
+                        <span class="grad-topic">以有機金屬化學氣相沉積法成長於 (111) 矽基板之氮化鎵島狀結構及其特性研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">沈煒凱</span>
+                        <span class="grad-topic">高電流氮化鎵場效電晶體之直流與動態特性研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">楊竣傑</span>
+                        <span class="grad-topic">具高電流與快速逆向回復時間之氮化鎵蕭基二極體製作與研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">蕭力函</span>
+                        <span class="grad-topic">氧化鋅磊晶膜之熱退火特性分析與電晶體製作</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 101 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">101 年</span>
+                    <span class="grad-year-count">碩士 4</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">許哲瑋</span>
+                        <span class="grad-topic">氧化鉿∕砷化銦金氧半結構之製備及其介面與電性研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">陳俊明</span>
+                        <span class="grad-topic">次微米磷化銦/砷化銦鎵異質接面雙極性電晶體自我對準基極平台開發</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">林惠鈴</span>
+                        <span class="grad-topic">增強型氮化鋁銦/氮化鎵/氮化鋁鎵/氮化鎵金屬-絕緣體-半導體場效電晶體之研製</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">徐至鴻</span>
+                        <span class="grad-topic">閘極掘入式增強型氮化鋁鎵/氮化鎵功率場效電晶體之研製</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 100 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">100 年</span>
+                    <span class="grad-year-count">碩士 5</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">林偉聖</span>
+                        <span class="grad-topic">具氮化鋁鎵/氮化鎵蕭基二極體之氮化銦鎵交流發光二極體</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">林憲佑</span>
+                        <span class="grad-topic">成長於傾斜 7°(001) 圖案化矽基板氮化鎵與氮化銦鎵之特性分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">張哲安</span>
+                        <span class="grad-topic">次微米銻砷化銦鎵基極之異質接面雙極性電晶體製程開發與射極尺寸效應之研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">林祐聖</span>
+                        <span class="grad-topic">銻砷化銦鎵基極之異質接面雙極性電晶體於高電流密度操作後之特性研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">曾信翔</span>
+                        <span class="grad-topic">低成本銻化銦歐姆接觸研究</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 99 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">99 年</span>
+                    <span class="grad-year-count">碩士 2</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">陳鵬壬</span>
+                        <span class="grad-topic">氮化鋁鎵/氮化鎵/氮化銦鎵電流散佈層應用於大面積氮化銦鎵發光二極體</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">林佩瑩</span>
+                        <span class="grad-topic">高崩潰電壓氮化鋁鎵/氮化鎵蕭基二極體之特性分析</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 98 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">98 年</span>
+                    <span class="grad-year-count">碩士 6</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">藍永凌</span>
+                        <span class="grad-topic">應用於氮化鋁鎵/氮化鎵高電子遷移率電晶體之高平坦/低阻值 N 型歐姆接觸</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">洪嘉濃</span>
+                        <span class="grad-topic">二維量子點光子晶體雷射模擬與分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">張朝閔</span>
+                        <span class="grad-topic">高增益低導通電壓銻砷化銦鎵異質接面雙極性電晶體之研製</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">伍金記</span>
+                        <span class="grad-topic">成長於矽基板之半極化氮化鎵磊晶層特性研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">江佩宜</span>
+                        <span class="grad-topic">銻砷化銦鎵基極異質接面雙極性電晶體之射極尺寸效應與歐姆接觸研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">李淑萍</span>
+                        <span class="grad-topic">1.3 µm 單模操作 qL2 光子晶體共振腔之設計與製作</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 97 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">97 年</span>
+                    <span class="grad-year-count">博士 3 · 碩士 6</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">陳冠廷</span>
+                        <span class="grad-topic">以有機金屬化學氣相沉積法選擇性成長氮化鎵半導體於矽基板與其特性分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">林宏誠</span>
+                        <span class="grad-topic">氮化銦鎵綠光發光二極體之研製</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">陳書涵</span>
+                        <span class="grad-topic">銻砷化銦鎵之雙異質接面雙極性電晶體成長與特性分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">許乃偉</span>
+                        <span class="grad-topic">半極性氮化銦鎵/氮化鎵發光二極體製作與分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">林若璇</span>
+                        <span class="grad-topic">氮化鎵基材漏電流行為與材料品質之奈米尺度研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">鄧國宏</span>
+                        <span class="grad-topic">具銻砷化銦鎵基極之磷化銦異質接面雙載子電晶體製作與分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">陳馨媛</span>
+                        <span class="grad-topic">具銻砷化銦鎵基極之異質接面雙極性電晶體特性與材料分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">林子翼</span>
+                        <span class="grad-topic">摻雜載子對砷化銦量子點雷射特性之影響</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">林壯聲</span>
+                        <span class="grad-topic">陣列式側向接面藍光氮化鎵發光二極體</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 96 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">96 年</span>
+                    <span class="grad-year-count">博士 2</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">謝東坡</span>
+                        <span class="grad-topic">砷化銦鎵/砷化鎵量子點光發射源</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">潘昌吉</span>
+                        <span class="grad-topic">氮化銦鎵紫外光發光二極體之研製</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 95 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">95 年</span>
+                    <span class="grad-year-count">碩士 3</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">謝奇勳</span>
+                        <span class="grad-topic">成長於圖案化藍寶石基板之氮化鎵發光二極體特性分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">蕭孟杰</span>
+                        <span class="grad-topic">具銻砷化銦鎵披覆層之砷化銦量子點特性研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">曾彥鈞</span>
+                        <span class="grad-topic">高品質因子與低模態體積光子晶體微共振腔之設計與製作</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 94 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">94 年</span>
+                    <span class="grad-year-count">博士 2 · 碩士 8</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">劉維昇</span>
+                        <span class="grad-topic">長波長砷化銦量子點異質結構與雷射</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">趙志剛</span>
+                        <span class="grad-topic">以化學束磊晶法成長三族氮化物奈米結構</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">黃文賓</span>
+                        <span class="grad-topic">氮化鎵高電壓蕭特基二極體之製作</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">林志維</span>
+                        <span class="grad-topic">大面積陣列式氮化鎵發光二極體之研製與分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">謝睿杰</span>
+                        <span class="grad-topic">高速磷化銦異質接面雙極性電晶體之製作與分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">徐培倫</span>
+                        <span class="grad-topic">量子井與量子點光學性質之模擬</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">張世邦</span>
+                        <span class="grad-topic">成長於 V 槽化 (100) 矽基板上氮化鎵/氮化銦鎵多重量子井之結構與光學特性研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">杜福安</span>
+                        <span class="grad-topic">利用二維光子晶體提升氮化鎵發光二極體發光效率之模擬與分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">呂政學</span>
+                        <span class="grad-topic">氮化銦鎵/氮化鎵量子井雷射二極體之研製與分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">邱瑞斌</span>
+                        <span class="grad-topic">量子點的電子能階</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 93 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">93 年</span>
+                    <span class="grad-year-count">碩士 5</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">高啟倫</span>
+                        <span class="grad-topic">大面積覆晶式氮化鎵發光二極體之製程技術開發與元件特性之探討</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">邱培晉</span>
+                        <span class="grad-topic">氮砷化銦鎵雷射二極體成長與研製</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">劉嘉紋</span>
+                        <span class="grad-topic">氮化銦鎵藍紫光發光二極體的載子傳輸行為之研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">陳柏翰</span>
+                        <span class="grad-topic">磷化銦/砷化銦鎵雙異質接面雙極性電晶體之製程與分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">黃子建</span>
+                        <span class="grad-topic">氮化鎵藍紫光雷射二極體研製與模擬分析</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 92 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">92 年</span>
+                    <span class="grad-year-count">博士 1 · 碩士 9</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">李家銘</span>
+                        <span class="grad-topic">氮化鎵發光二極體之研製</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">許文杰</span>
+                        <span class="grad-topic">大面積覆晶式氮化鎵發光二極體之研製與特性探討</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">方啟鑫</span>
+                        <span class="grad-topic">高反射 p 型氮化鎵歐姆接觸之研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">王聖瑜</span>
+                        <span class="grad-topic">磷化銦異質接面雙極性電晶體元件製作與特性分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">林宏誠</span>
+                        <span class="grad-topic">氮化鎵藍紫光雷射二極體之製作與特性分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">劉育全</span>
+                        <span class="grad-topic">氮化銦鎵發光二極體之研製</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">陳銘勝</span>
+                        <span class="grad-topic">氮化鎵發光二極體製程技術之研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">丁肇敏</span>
+                        <span class="grad-topic">氮化銦鎵系列多層量子井之光學特性探討</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">李建德</span>
+                        <span class="grad-topic">氮化鋁銦鎵藍紫光雷射二極體之研製</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 91 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">91 年</span>
+                    <span class="grad-year-count">碩士 2</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">蔡旻倪</span>
+                        <span class="grad-topic">異質接面雙極性電晶體 VBIC 模型建立及其功率特性模擬</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">李孟麟</span>
+                        <span class="grad-topic">磷化銦/砷化銦鎵雙異質接面雙極性電晶體製作與特性分析</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 90 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">90 年</span>
+                    <span class="grad-year-count">博士 1 · 碩士 3</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">卓昌正</span>
+                        <span class="grad-topic">氮化銦鎵量子井與藍紫光雷射二極體結構之成長與分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">林鴻書</span>
+                        <span class="grad-topic">不同濃度矽摻雜之氮化鋁銦鎵位障層對紫外光發光二極體發光機制之影響</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">李政鴻</span>
+                        <span class="grad-topic">二元與四元位障層應用於氮化銦鎵綠光二極體之光性分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">林明儀</span>
+                        <span class="grad-topic">P 型氮化銦鎵歐姆接觸層對氮化鋁銦鎵藍紫光雷射二極體特性之影響</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 89 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">89 年</span>
+                    <span class="grad-year-count">博士 1 · 碩士 4</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">葉念慈</span>
+                        <span class="grad-topic">砷化銦量子點異質結構與雷射</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">曾明源</span>
+                        <span class="grad-topic">磷化銦鎵/砷化鎵異質接面雙極性電晶體鈍化層穩定性與高頻特性之研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">陳冠廷</span>
+                        <span class="grad-topic">氮化鋁鎵銦藍紫光雷射二極體研製與特性分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">甘佳民</span>
+                        <span class="grad-topic">氮化鋁中間層對氮化鋁鎵/氮化鎵異質接面場效電晶體之影響</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">鄭先發</span>
+                        <span class="grad-topic">p 型披覆層對量子井藍色發光二極體發光機制之影響</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 88 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">88 年</span>
+                    <span class="grad-year-count">博士 1 · 碩士 1</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">倪澤恩</span>
+                        <span class="grad-topic">以分子束磊晶成長量子點結構及雷射元件</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">戴菁甫</span>
+                        <span class="grad-topic">氮化鎵/氮化銦鎵多層量子井藍光二極體之研製及其光電特性之研究</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 87 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">87 年</span>
+                    <span class="grad-year-count">博士 2 · 碩士 2</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">潘貞維</span>
+                        <span class="grad-topic">1.3 微米砷化銦鋁鎵多重量子井雷射之研製</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">張茂男</span>
+                        <span class="grad-topic">穿透式電子顯微鏡對低溫成長之三五族砷化物的砷析出行為研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">朱昌榮</span>
+                        <span class="grad-topic">異質接面雙極性電晶體之等效電路模型建立及其在射頻電路之應用</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">蕭博文</span>
+                        <span class="grad-topic">不同間隔層砷化銦鎵量子點雷射</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 86 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">86 年</span>
+                    <span class="grad-year-count">博士 3 · 碩士 2</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">袁榮亨</span>
+                        <span class="grad-topic">高速金屬半導體金屬光偵測之設計製作與特性析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">謝佳霖</span>
+                        <span class="grad-topic">磊晶成長砷化銦鎵與砷化銦鋁應變鬆弛材料及其元件之應用</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">博士</span>
+                        <span class="grad-name">黃漢屏</span>
+                        <span class="grad-topic">砷化銦鋁/砷化銦鎵和砷化鋁鎵/砷化鎵異質接面雙極性電晶體之研製及其在微波放大器之應用</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">陳明鴻</span>
+                        <span class="grad-topic">長波長砷化銦鋁鎵多重量子井雷射之研製</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">許正憬</span>
+                        <span class="grad-topic">利用多靶式射頻濺鍍鈦酸鍶鋇及其在 DRAM 上應用上之研究</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 85 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">85 年</span>
+                    <span class="grad-year-count">碩士 6</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">甄明</span>
+                        <span class="grad-topic">積體化單石微波放大器與光接收器之研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">趙志剛</span>
+                        <span class="grad-topic">活性離子蝕刻氮化鎵及氮化銦鎵之研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">趙昆基</span>
+                        <span class="grad-topic">1.3 微米砷化銦鋁鎵多重量子井雷射之研製</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">許智傑</span>
+                        <span class="grad-topic">摻雜調變金屬-半導體-金屬光偵測高速特性之研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">何光澤</span>
+                        <span class="grad-topic">砷化銦鎵/砷化鎵與砷化鋁鎵/砷化銦鎵異質結構接面場效電晶體之設計與製作</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 84 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">84 年</span>
+                    <span class="grad-year-count">碩士 3</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">王信凱</span>
+                        <span class="grad-topic">量子井雷射之光侷限因子及遠場圖之計算</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">簡怡峻</span>
+                        <span class="grad-topic">砷化鋁鎵/砷化鎵脈衝摻雜金屬-半導體-金屬光偵測器之特性分析</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">鄭詠世</span>
+                        <span class="grad-topic">砷化鋁鎵/砷化鎵異質接面二極體及雙極性電晶體表面鈍化層之研究</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 83 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">83 年</span>
+                    <span class="grad-year-count">碩士 3</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">周建志</span>
+                        <span class="grad-topic">砷化鋁鎵/砷化鎵異質接面二極體及雙極性電晶體表面鈍化與穩定性之研究</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">高境鴻</span>
+                        <span class="grad-topic">砷化銦鋁鎵/砷化鋁鎵量子井雷射之設計與製作</span>
+                    </li>
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">謝鴻章</span>
+                        <span class="grad-topic">砷化鎵金屬-半導體-金屬光偵測器之研製及特性分析</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 82 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">82 年</span>
+                    <span class="grad-year-count">碩士 1</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">林蓉珍</span>
+                        <span class="grad-topic">砷化銦鋁蕭基二極體之研究</span>
+                    </li>
+                </ul>
+            </details>
+
+            <!-- 81 年 -->
+            <details class="grad-year">
+                <summary>
+                    <span class="grad-year-label">81 年</span>
+                    <span class="grad-year-count">碩士 1</span>
+                    <span class="grad-year-arrow">▶</span>
+                </summary>
+                <ul class="grad-list">
+                    <li class="grad-item">
+                        <span class="grad-degree">碩士</span>
+                        <span class="grad-name">魏琮商</span>
+                        <span class="grad-topic">砷化銦鎵/磷化銦 金屬-半導體-金屬 光偵測器之研製</span>
+                    </li>
+                </ul>
+            </details>
+
+        </div>
+    </section>
+</div>
+   <div >Website crafted by Bill Chen · Last updated: 2025/11/05
+</div>
+</body>
+</html>
+

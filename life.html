@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>生活剪映 - 教授個人網站</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --bg: #020617;
+            --bg-card: #020819;
+            --bg-soft: #0b1120;
+            --border-subtle: #1f2937;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56,189,248,0.12);
+            --text-main: #e5e7eb;
+            --text-muted: #9ca3af;
+            --heading: #f9fafb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         "Noto Sans TC", "PingFang TC", sans-serif;
+            background:
+                radial-gradient(circle at 0% 0%, #1d2a41 0, transparent 50%),
+                radial-gradient(circle at 100% 0%, #0b1120 0, transparent 55%),
+                linear-gradient(160deg, #020617 0%, #020617 60%, #020617 100%);
+            color: var(--text-main);
+            line-height: 1.75;
+        }
+
+        /* -------- 導覽列 -------- */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(15,23,42,0.96);
+            border-bottom: 1px solid var(--border-subtle);
+            backdrop-filter: blur(10px);
+        }
+
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 10px 18px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px 20px;
+            justify-content: space-between;
+        }
+
+        nav .nav-title {
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        nav .nav-links {
+            flex: 1;
+            text-align: right;
+            font-size: 0.9rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 4px 8px;
+            margin: 0 2px;
+            border-radius: 999px;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+        }
+
+        nav a:hover {
+            background: var(--accent-soft);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        /* -------- 內容框架 -------- */
+        .page-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 18px 56px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 0.8rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin: 4px 0 6px;
+            font-size: 1.8rem;
+            color: var(--heading);
+        }
+
+        .subtitle {
+            margin: 0 0 18px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* -------- 年度區塊 -------- */
+        .life-year-section {
+            margin-top: 22px;
+        }
+
+        .life-year-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .life-year-chip {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--heading);
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(56,189,248,0.7);
+            background: radial-gradient(circle at 0 0, rgba(56,189,248,0.25), transparent 60%);
+        }
+
+        .life-year-note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* -------- 卡片網格 -------- */
+        .life-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 12px 16px;
+        }
+
+        .life-card {
+            position: relative;
+            padding: 12px 14px 12px;
+            border-radius: 16px;
+            background: radial-gradient(circle at 0% 0%, rgba(56,189,248,0.14), transparent 60%),
+                        linear-gradient(135deg, rgba(15,23,42,0.98), rgba(15,23,42,0.94));
+            border: 1px solid rgba(51,65,85,0.95);
+            box-shadow: 0 14px 30px rgba(15,23,42,0.8);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+        }
+
+        .life-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(56,189,248,0.9);
+            box-shadow: 0 20px 40px rgba(8,47,73,0.95);
+        }
+
+        .life-card-date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .life-card-title {
+            margin: 0 0 6px;
+            font-size: 0.96rem;
+            color: var(--heading);
+            font-weight: 600;
+        }
+
+        .life-card-link {
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .life-card-link:hover {
+            text-decoration: underline;
+        }
+
+        .life-card-arrow {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            font-size: 0.9rem;
+            color: var(--accent);
+            opacity: 0.8;
+        }
+
+        @media (max-width: 800px) {
+            nav .nav-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav .nav-links {
+                text-align: left;
+                width: 100%;
+                line-height: 1.6;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 導覽列 -->
+<nav>
+    <div class="nav-inner">
+        <div class="nav-title">Prof. Jen-Inn Chyi · Lab</div>
+        <div class="nav-links">
+            <a href="index.html">首頁</a>
+            <a href="professor.html">教授簡介</a>
+            <a href="research.html">研究計劃</a>
+            <a href="team.html">研究團隊</a>
+            <a href="achievements.html">研究成果</a>
+            <a href="publications.html">論文發表</a>
+            <a href="courses.html">開課內容</a>
+            <a href="equipment.html">實驗設備</a>
+            <a href="life.html">生活剪映</a>
+            <a href="links.html">相關連結</a>
+        </div>
+    </div>
+</nav>
+
+<div class="page-wrapper">
+    <span class="eyebrow">Lab Life</span>
+    <h1>生活剪映</h1>
+    <p class="subtitle">歷年實驗室聚會、出遊與重要時刻，相簿連結整理。</p>
+
+    <!-- 2016 -->
+    <section class="life-year-section">
+        <div class="life-year-header">
+            <div class="life-year-chip">2016</div>
+            <div class="life-year-note">謝師宴、導生聚餐</div>
+        </div>
+        <div class="life-grid">
+            <a class="life-card" href="https://chyi408.pixnet.net/album/set/15498716" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">2016-08-16</div>
+                <div class="life-card-title">謝師宴</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+            <a class="life-card" href="https://chyi408.pixnet.net/album/set/15498677" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">2016-03-16</div>
+                <div class="life-card-title">大一導生聚餐</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 2015 -->
+    <section class="life-year-section">
+        <div class="life-year-header">
+            <div class="life-year-chip">2015</div>
+            <div class="life-year-note">聖誕活動與潘文淵研究傑出獎</div>
+        </div>
+        <div class="life-grid">
+            <a class="life-card" href="https://chyi408.pixnet.net/album/set/15097129" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">2015-12-18</div>
+                <div class="life-card-title">聖誕 PIZZA 響宴</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+            <a class="life-card" href="https://chyi408.pixnet.net/album/set/14898514" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">2015-08-21</div>
+                <div class="life-card-title">謝師宴</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+            <a class="life-card" href="https://chyi408.pixnet.net/album/set/14898496" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">2015-06-23</div>
+                <div class="life-card-title">潘文淵研究傑出獎頒獎典禮</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 2014 -->
+    <section class="life-year-section">
+        <div class="life-year-header">
+            <div class="life-year-chip">2014</div>
+            <div class="life-year-note">期末聚餐與謝師宴</div>
+        </div>
+        <div class="life-grid">
+            <a class="life-card" href="https://chyi408.pixnet.net/album/set/13912498" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">2014-11-25</div>
+                <div class="life-card-title">期末聚餐</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+            <a class="life-card" href="https://chyi408.pixnet.net/album/photo/553644607" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">2014-08-14</div>
+                <div class="life-card-title">謝師宴</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 2014 / 2013 之交 -->
+    <section class="life-year-section">
+        <div class="life-year-header">
+            <div class="life-year-chip">2014–2013</div>
+            <div class="life-year-note">春酒、年末聚餐、冬至湯圓</div>
+        </div>
+        <div class="life-grid">
+            <a class="life-card" href="https://chyi408.pixnet.net/album/set/11394777" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">2014-02-26</div>
+                <div class="life-card-title">春酒</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+            <a class="life-card" href="https://chyi408.pixnet.net/album/photo/504362430" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">2014-01-24</div>
+                <div class="life-card-title">年末聚餐</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+            <a class="life-card" href="https://chyi408.pixnet.net/album/photo/504362151" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">2013-12-22</div>
+                <div class="life-card-title">冬至吃湯圓</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 2013 -->
+    <section class="life-year-section">
+        <div class="life-year-header">
+            <div class="life-year-chip">2013</div>
+            <div class="life-year-note">九族文化村、宜蘭之旅、八仙出遊、桃園巨蛋</div>
+        </div>
+        <div class="life-grid">
+            <a class="life-card" href="https://chyi408.pixnet.net/album/set/8863350" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">2013-09-17</div>
+                <div class="life-card-title">九族文化村</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+            <a class="life-card" href="https://chyi408.pixnet.net/album/set/13912498" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">2013-08-19</div>
+                <div class="life-card-title">宜蘭之旅</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+            <a class="life-card" href="https://chyi408.pixnet.net/album/set/8863764" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">2013-08-18</div>
+                <div class="life-card-title">實驗室出遊 · 八仙</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+            <a class="life-card" href="https://chyi408.pixnet.net/album/set/8863443" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">2013-05-18</div>
+                <div class="life-card-title">桃園巨蛋棒球賽</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 2012 -->
+    <section class="life-year-section">
+        <div class="life-year-header">
+            <div class="life-year-chip">2012</div>
+            <div class="life-year-note">台達實驗室啟用、中秋烤肉、KTV</div>
+        </div>
+        <div class="life-grid">
+            <a class="life-card" href="https://chyi408.pixnet.net/album/set/8863512" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">2012-10-04</div>
+                <div class="life-card-title">台達先進電力電子實驗室啟用典禮</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+            <a class="life-card" href="https://chyi408.pixnet.net/album/set/8863425" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">2012-09-19</div>
+                <div class="life-card-title">中秋烤肉</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+            <a class="life-card" href="https://chyi408.pixnet.net/album/set/8863824" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">2012-03-16</div>
+                <div class="life-card-title">KTV</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 2011 -->
+    <section class="life-year-section">
+        <div class="life-year-header">
+            <div class="life-year-chip">2011</div>
+            <div class="life-year-note">生日與畢業典禮</div>
+        </div>
+        <div class="life-grid">
+            <a class="life-card" href="https://chyi408.pixnet.net/album/set/8863308" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">2011-10-17</div>
+                <div class="life-card-title">生日快樂</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+            <a class="life-card" href="https://chyi408.pixnet.net/album/set/8863482" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">2011-06-11</div>
+                <div class="life-card-title">畢業典禮</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 2010 -->
+    <section class="life-year-section">
+        <div class="life-year-header">
+            <div class="life-year-chip">2010</div>
+            <div class="life-year-note">研討會與聚餐</div>
+        </div>
+        <div class="life-grid">
+            <a class="life-card" href="https://chyi408.pixnet.net/album/set/7085277" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">2010-11-18</div>
+                <div class="life-card-title">研討會 - IEDMS</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+            <a class="life-card" href="https://chyi408.pixnet.net/album/set/7027278" target="_blank" rel="noopener noreferrer">
+                <div class="life-card-date">（未標註日期）</div>
+                <div class="life-card-title">實驗室聚餐</div>
+                <span class="life-card-link">前往相簿</span>
+                <span class="life-card-arrow">↗</span>
+            </a>
+        </div>
+    </section>
+
+</div>
+   <div >Website crafted by Bill Chen · Last updated: 2025/11/05
+</div>
+</body>
+</html>

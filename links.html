@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>相關連結 - 教授個人網站</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --bg: #020617;
+            --bg-card: #020819;
+            --bg-soft: #0b1120;
+            --border-subtle: #1f2937;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56,189,248,0.12);
+            --text-main: #e5e7eb;
+            --text-muted: #9ca3af;
+            --heading: #f9fafb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         "Noto Sans TC", "PingFang TC", sans-serif;
+            background:
+                radial-gradient(circle at 0% 0%, #1d2a41 0, transparent 50%),
+                radial-gradient(circle at 100% 0%, #0b1120 0, transparent 55%),
+                linear-gradient(160deg, #020617 0%, #020617 60%, #020617 100%);
+            color: var(--text-main);
+            line-height: 1.75;
+        }
+
+        /* ------- 導覽列 ------- */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(15,23,42,0.96);
+            border-bottom: 1px solid var(--border-subtle);
+            backdrop-filter: blur(10px);
+        }
+
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 10px 18px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px 20px;
+            justify-content: space-between;
+        }
+
+        nav .nav-title {
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        nav .nav-links {
+            flex: 1;
+            text-align: right;
+            font-size: 0.9rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 4px 8px;
+            margin: 0 2px;
+            border-radius: 999px;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+        }
+
+        nav a:hover {
+            background: var(--accent-soft);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        /* ------- 內容框架 ------- */
+        .page-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 18px 56px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 0.8rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin: 4px 0 4px;
+            font-size: 1.8rem;
+            color: var(--heading);
+        }
+
+        .subtitle {
+            margin: 0 0 18px;
+            font-size: 0.94rem;
+            color: var(--text-muted);
+        }
+
+        /* ------- logo 區（九宮格） ------- */
+        .links-section {
+            margin-top: 10px;
+            padding: 22px 24px 24px;
+            border-radius: 18px;
+            background: rgba(15,23,42,0.9);
+            border: 1px solid rgba(51,65,85,0.9);
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 固定三欄 → 九宮格 */
+            gap: 18px 18px;
+        }
+
+        .link-card {
+            background: rgba(15,23,42,0.95);
+            border-radius: 14px;
+            border: 1px solid rgba(31,41,55,0.9);
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 90px;           /* 讓每格高度差不多 */
+            transition: border-color 0.18s ease, transform 0.18s ease,
+                        box-shadow 0.18s ease, background 0.18s ease;
+        }
+
+        .link-card:hover {
+            border-color: var(--accent);
+            background: rgba(15,23,42,1);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(15,23,42,0.9);
+        }
+
+        .link-card img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .link-card a {
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        @media (max-width: 700px) {
+            .links-grid {
+                grid-template-columns: repeat(2, 1fr); /* 平板兩欄 */
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav .nav-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav .nav-links {
+                text-align: left;
+                width: 100%;
+                line-height: 1.6;
+            }
+
+            .links-section {
+                padding: 18px 16px;
+            }
+
+            .links-grid {
+                grid-template-columns: 1fr; /* 手機一欄 */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <div class="nav-title">Prof. Jen-Inn Chyi · Lab</div>
+        <div class="nav-links">
+            <a href="index.html">首頁</a>
+            <a href="professor.html">教授簡介</a>
+            <a href="research.html">研究計劃</a>
+            <a href="team.html">研究團隊</a>
+            <a href="achievements.html">研究成果</a>
+            <a href="publications.html">論文發表</a>
+            <a href="courses.html">開課內容</a>
+            <a href="equipment.html">實驗設備</a>
+            <a href="life.html">生活剪映</a>
+            <a href="links.html">相關連結</a>
+        </div>
+    </div>
+</nav>
+
+<div class="page-wrapper">
+    <span class="eyebrow">Useful Links</span>
+    <h1>相關連結</h1>
+    <p class="subtitle">點擊以下圖示前往對應網站（會在新分頁開啟）。</p>
+
+    <div class="links-section">
+        <div class="links-grid">
+
+            <div class="link-card">
+                <a href="https://www.ncu.edu.tw/" target="_blank" rel="noopener noreferrer">
+                    <img src="png/NCU.png" alt="國立中央大學 National Central University">
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="https://www.ee.ncu.edu.tw/" target="_blank" rel="noopener noreferrer">
+                    <img src="png/NCUEE.png" alt="中央大學電機工程學系 Department of Electrical Engineering">
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="https://ndltd.ncl.edu.tw/" target="_blank" rel="noopener noreferrer">
+                    <img src="png/NDLTD.png" alt="臺灣博碩士論文知識加值系統 NDLTD in Taiwan">
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="https://www.tekcore.com.tw/" target="_blank" rel="noopener noreferrer">
+                    <img src="png/TEKC.png" alt="TEKCORE">
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="https://aip.scitation.org/" target="_blank" rel="noopener noreferrer">
+                    <img src="png/AIP.png" alt="AIP Scitation">
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="https://www.deltaww.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="png/DELTA.png" alt="Delta Electronics">
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer">
+                    <img src="png/IEEE.png" alt="IEEE">
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="https://iopscience.iop.org/journal/1347-4065" target="_blank" rel="noopener noreferrer">
+                    <img src="png/JJAP.png" alt="Japanese Journal of Applied Physics (JJAP)">
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="https://www.ncl.edu.tw/" target="_blank" rel="noopener noreferrer">
+                    <img src="png/NCL.png" alt="國家圖書館 National Central Library">
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+   <div >Website crafted by Bill Chen · Last updated: 2025/11/05
+</div>
+</body>
+</html>
+

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>實驗設備 - 教授個人網站</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --bg: #020617;
+            --bg-card: #020819;
+            --bg-soft: #0b1120;
+            --border-subtle: #1f2937;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56,189,248,0.12);
+            --text-main: #e5e7eb;
+            --text-muted: #9ca3af;
+            --heading: #f9fafb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         "Noto Sans TC", "PingFang TC", sans-serif;
+            background:
+                radial-gradient(circle at 0% 0%, #1d2a41 0, transparent 50%),
+                radial-gradient(circle at 100% 0%, #0b1120 0, transparent 55%),
+                linear-gradient(160deg, #020617 0%, #020617 60%, #020617 100%);
+            color: var(--text-main);
+            line-height: 1.75;
+        }
+
+        /* --------------- 導覽列 --------------- */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(15,23,42,0.96);
+            border-bottom: 1px solid var(--border-subtle);
+            backdrop-filter: blur(10px);
+        }
+
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 10px 18px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px 20px;
+            justify-content: space-between;
+        }
+
+        nav .nav-title {
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        nav .nav-links {
+            flex: 1;
+            text-align: right;
+            font-size: 0.9rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 4px 8px;
+            margin: 0 2px;
+            border-radius: 999px;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+        }
+
+        nav a:hover {
+            background: var(--accent-soft);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        /* --------------- 內容框架 --------------- */
+        .page-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 18px 56px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 0.8rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin: 4px 0 8px;
+            font-size: 1.8rem;
+            color: var(--heading);
+        }
+
+        .subtitle {
+            margin: 0 0 18px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* --------------- 區塊標題 --------------- */
+        .section-block {
+            margin-top: 26px;
+        }
+
+        .section-title {
+            font-size: 1.05rem;
+            color: var(--heading);
+            border-left: 3px solid var(--accent);
+            padding-left: 10px;
+            margin-bottom: 12px;
+        }
+
+        /* --------------- 實驗設備卡片 --------------- */
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .equipment-card {
+            background: rgba(15,23,42,0.95);
+            border-radius: 16px;
+            border: 1px solid rgba(31,41,55,0.95);
+            overflow: hidden;
+            box-shadow: 0 18px 38px rgba(15,23,42,0.75);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .equipment-image {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            display: block;
+            background: #020617;
+        }
+
+        .equipment-body {
+            padding: 12px 14px 14px;
+        }
+
+        .equipment-name {
+            font-size: 0.98rem;
+            color: var(--heading);
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .equipment-en {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .equipment-meta {
+            font-size: 0.82rem;
+            color: var(--text-main);
+        }
+
+        .equipment-meta div {
+            margin-bottom: 2px;
+        }
+
+        .equipment-tag {
+            display: inline-block;
+            margin-top: 6px;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(148,163,184,0.8);
+            color: var(--accent);
+            background: rgba(15,23,42,0.9);
+        }
+
+        @media (max-width: 800px) {
+            nav .nav-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav .nav-links {
+                text-align: left;
+                width: 100%;
+                line-height: 1.6;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 導覽列 -->
+<nav>
+    <div class="nav-inner">
+        <div class="nav-title">Prof. Jen-Inn Chyi · Lab</div>
+        <div class="nav-links">
+            <a href="index.html">首頁</a>
+            <a href="professor.html">教授簡介</a>
+            <a href="research.html">研究計劃</a>
+            <a href="team.html">研究團隊</a>
+            <a href="achievements.html">研究成果</a>
+            <a href="publications.html">論文發表</a>
+            <a href="courses.html">開課內容</a>
+            <a href="equipment.html">實驗設備</a>
+            <a href="life.html">生活剪映</a>
+            <a href="links.html">相關連結</a>
+        </div>
+    </div>
+</nav>
+
+<div class="page-wrapper">
+    <span class="eyebrow">Laboratory Facilities</span>
+    <h1>實驗設備</h1>
+    <p class="subtitle">本頁列出實驗室主要成長、製程與量測設備。</p>
+
+    <!-- MBE 系統 -->
+    <div class="section-block">
+        <div class="section-title">分子束磊晶系統 (MBE)</div>
+        <div class="equipment-grid">
+            <!-- MBE 32P -->
+            <div class="equipment-card">
+                <img src="png/MBE1.png" alt="Riber MBE 32P" class="equipment-image">
+                <div class="equipment-body">
+                    <div class="equipment-name">分子束磊晶系統</div>
+                    <div class="equipment-en">Molecular Beam Epitaxy · Riber MBE 32P</div>
+                    <div class="equipment-meta">
+                        <div>用途：III-V 族化合物半導體材料成長</div>
+                    </div>
+                    <span class="equipment-tag">MBE-32</span>
+                </div>
+            </div>
+
+            <!-- MBE compact 21 -->
+            <div class="equipment-card">
+                <img src="png/MBE2.png" alt="Riber MBE Compact 21" class="equipment-image">
+                <div class="equipment-body">
+                    <div class="equipment-name">分子束磊晶系統</div>
+                    <div class="equipment-en">Molecular Beam Epitaxy · Riber MBE Compact 21</div>
+                    <div class="equipment-meta">
+                        <div>用途：III-V 族化合物半導體材料成長</div>
+                    </div>
+                    <span class="equipment-tag">Compact 21</span>
+                </div>
+            </div>
+
+            <!-- MBE compact 12 -->
+            <div class="equipment-card">
+                <img src="png/MBE3.png" alt="Riber MBE Compact 12" class="equipment-image">
+                <div class="equipment-body">
+                    <div class="equipment-name">分子束磊晶系統</div>
+                    <div class="equipment-en">Molecular Beam Epitaxy · Riber MBE Compact 12</div>
+                    <div class="equipment-meta">
+                        <div>用途：III-V 族化合物半導體材料成長</div>
+                    </div>
+                    <span class="equipment-tag">Compact 12</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOCVD 系統 -->
+    <div class="section-block">
+        <div class="section-title">有機金屬化學氣相沉積系統 (MOCVD)</div>
+        <div class="equipment-grid">
+            <!-- AIXTRON 200/4 RF -->
+            <div class="equipment-card">
+                <img src="png/MOCVD.png" alt="AIXTRON 200/4 RF MOCVD" class="equipment-image">
+                <div class="equipment-body">
+                    <div class="equipment-name">MOCVD 系統</div>
+                    <div class="equipment-en">Metalorganic Chemical Vapor Deposition · AIXTRON 200/4 RF</div>
+                    <div class="equipment-meta">
+                        <div>用途：氮化鎵系列材料成長</div>
+                    </div>
+                    <span class="equipment-tag">MOCVD-1</span>
+                </div>
+            </div>
+
+            <!-- CCS 6x2" FT MOCVD -->
+            <div class="equipment-card">
+                <img src="png/MOCVD2.png" alt="AIXTRON CCS 6x2&quot; FT MOCVD" class="equipment-image">
+                <div class="equipment-body">
+                    <div class="equipment-name">MOCVD 系統</div>
+                    <div class="equipment-en">
+                        Metalorganic Chemical Vapor Deposition ·
+                        AIXTRON / CCS 6×2&quot; (1×6&quot;) FT with LayTec EPITT curve
+                    </div>
+                    <div class="equipment-meta">
+                        <div>用途：氮化鎵系列材料成長</div>
+                    </div>
+                    <span class="equipment-tag">MOCVD-2</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 製程與量測設備 -->
+    <div class="section-block">
+        <div class="section-title">製程與量測設備</div>
+        <div class="equipment-grid">
+            <!-- FE-SEM -->
+            <div class="equipment-card">
+                <img src="png/SEM.png" alt="HITACHI S-4300 FE-SEM" class="equipment-image">
+                <div class="equipment-body">
+                    <div class="equipment-name">場發射掃描式電子顯微鏡</div>
+                    <div class="equipment-en">Field Emission Scanning Electron Microscope · HITACHI S-4300</div>
+                    <div class="equipment-meta">
+                        <div>用途：奈微米元件輪廓測量</div>
+                    </div>
+                    <span class="equipment-tag">FE-SEM</span>
+                </div>
+            </div>
+
+            <!-- E-gun evaporator -->
+            <div class="equipment-card">
+                <img src="png/Egun.png" alt="ULVAC E-gun evaporator" class="equipment-image">
+                <div class="equipment-body">
+                    <div class="equipment-name">電子槍濺鍍機</div>
+                    <div class="equipment-en">E-gun Evaporator (oxide material) · ULVAC</div>
+                    <div class="equipment-meta">
+                        <div>用途：成長 ZnO / ITO / SiO₂ 等薄膜，應用於半導體元件製作</div>
+                    </div>
+                    <span class="equipment-tag">E-gun</span>
+                </div>
+            </div>
+
+            <!-- Hall measurement -->
+            <div class="equipment-card">
+                <img src="png/Hall.png" alt="ACCENT HL5500 Hall system" class="equipment-image">
+                <div class="equipment-body">
+                    <div class="equipment-name">霍爾量測設備</div>
+                    <div class="equipment-en">Hall Measurement System · ACCENT HL5500</div>
+                    <div class="equipment-meta">
+                        <div>用途：量測載子濃度、移動率、電阻率與霍爾係數</div>
+                    </div>
+                    <span class="equipment-tag">Hall</span>
+                </div>
+            </div>
+
+            <!-- PL system -->
+            <div class="equipment-card">
+                <img src="png/PL.png" alt="PL system" class="equipment-image">
+                <div class="equipment-body">
+                    <div class="equipment-name">PL 光激發螢光系統</div>
+                    <div class="equipment-en">Photoluminescence System · KIMMON IK3552R-G-</div>
+                    <div class="equipment-meta">
+                        <div>用途：325 nm He-Cd 雷射激發之非破壞性材料光譜分析</div>
+                    </div>
+                    <span class="equipment-tag">PL</span>
+                </div>
+            </div>
+
+            <!-- TVR6000N rectifier tester -->
+            <div class="equipment-card">
+                <img src="png/TVR6000N.png" alt="POWORLD TVR6000N Rectifier Tester" class="equipment-image">
+                <div class="equipment-body">
+                    <div class="equipment-name">二極體電壓電流測試機</div>
+                    <div class="equipment-en">Rectifier Tester · POWORLD TVR6000N (5 V ~ -2000 V)</div>
+                    <div class="equipment-meta">
+                        <div>用途：二極體順向/逆向 I–V 特性量測，順向電流至 25 A，崩潰電壓至 2000 V</div>
+                    </div>
+                    <span class="equipment-tag">TVR6000N</span>
+                </div>
+            </div>
+
+            <!-- PQRR2009 (暫無圖片) -->
+            <div class="equipment-card">
+                <img src="png/PQRR2009.png" alt="POWORLD TVR6000N Rectifier Tester" class="equipment-image">
+                <div class="equipment-body">
+                    <div class="equipment-name">逆向回復時間 / 電荷測試機</div>
+                    <div class="equipment-en">Reverse Recovery Time / Charge Tester · POWORLD PQRR2009</div>
+                    <div class="equipment-meta">
+                        <div>用途：分析二極體逆向回復時間與電荷，評估開關損耗</div>
+                    </div>
+                    <span class="equipment-tag">PQRR2009</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+   <div >Website crafted by Bill Chen · Last updated: 2025/11/05
+</div>
+</body>
+</html>
