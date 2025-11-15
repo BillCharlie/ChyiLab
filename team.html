@@ -185,11 +185,26 @@
             background: rgba(15,23,42,0.92);
         }
 
-        .member-photo-placeholder img {
-           max-width: 180px;  /* 最大寬度 */
-          height: auto;      /* 高度自動等比例縮放 */
+        /* 圖片外層：固定在一個方框裡 */
+       .member-photo-placeholder {
+            width: 120px;      /* 表格裡照片格子的寬度 */
+            height: 150px;     /* 表格裡照片格子的高度 */
+            overflow: hidden;  /* 超出方框的部分裁掉 */
+            border-radius: 8px;
+            background: #020617;
+       }
+
+           /* 裡面的 img：自動填滿方框、等比例裁切 */
+       .member-photo-placeholder img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover; /* 保持比例、填滿整個方框 */
           display: block;
         }
+        .member-table td {
+        vertical-align: middle;
+        }
+
 
 
         .member-name {
@@ -1711,6 +1726,7 @@
 </div>
 </body>
 </html>
+
 
 
 
