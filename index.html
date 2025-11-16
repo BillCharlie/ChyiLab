@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
@@ -44,8 +44,9 @@
         .entrance-wrap {
             width: 100%;
             max-width: 720px;
-            background: radial-gradient(circle at top left, rgba(56,189,248,0.16), transparent 55%)
-                        , rgba(15,23,42,0.94);
+            background:
+                radial-gradient(circle at top left, rgba(56,189,248,0.16), transparent 55%),
+                rgba(15,23,42,0.94);
             border-radius: 28px;
             box-shadow: 0 22px 50px rgba(0,0,0,0.75);
             padding: 24px 28px 28px;
@@ -53,6 +54,7 @@
             overflow: hidden;
         }
 
+        /* 外框發光邊 */
         .entrance-wrap::before {
             content: "";
             position: absolute;
@@ -95,96 +97,83 @@
             background: linear-gradient(90deg,#22d3ee,#38bdf8,#f97316);
         }
 
-        .content-row {
+        .content-main {
             position: relative;
-            margin-top: 10px;
+            margin-top: 16px;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 24px;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .intro-text {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #9ca3af;
+            max-width: 40rem;
+        }
+
+        .tag-row {
+            display: flex;
             flex-wrap: wrap;
+            gap: 8px;
         }
 
-        .pokeball-link {
-            display: inline-block;
+        .tag-pill {
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148,163,184,0.7);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #e5e7eb;
+            background: rgba(15,23,42,0.9);
+        }
+
+        .enter-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .enter-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 26px;
+            border-radius: 999px;
+            background: linear-gradient(90deg,#22d3ee,#38bdf8,#f97316);
+            color: #0f172a;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
             text-decoration: none;
-            flex: 0 1 48%;
-            max-width: 360px;
-        }
-
-        .pokeball-img {
-            width: 100%;
-            height: auto;
-            border-radius: 18px;
-            display: block;
+            text-transform: uppercase;
+            box-shadow: 0 14px 35px rgba(15,118,180,0.6);
             cursor: pointer;
-            box-shadow: 0 18px 40px rgba(15,23,42,0.8);
-            transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+            transition: transform 0.15s ease,
+                        box-shadow 0.15s ease,
+                        filter 0.15s ease;
         }
 
-        .pokeball-link:hover .pokeball-img {
-            transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 26px 60px rgba(15,23,42,0.95);
-            filter: brightness(1.05);
+        .enter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 40px rgba(15,118,180,0.75);
+            filter: brightness(1.03);
         }
 
-        .side-hint {
-            flex: 1 1 210px;
-            position: relative;
-            color: #e5e7eb;
+        .enter-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 10px 24px rgba(15,118,180,0.55);
         }
 
-        .side-hint-title {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: #e5e7eb;
-        }
-
-        .side-hint-body {
-            font-size: 0.93rem;
-            line-height: 1.7;
+        .enter-hint {
+            font-size: 0.85rem;
             color: #9ca3af;
         }
 
-        /* 這個 badge 現在是超連結 */
-        .side-hint-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 10px;
-            padding: 6px 12px;
-            border-radius: 999px;
-            background: rgba(15,23,42,0.9);
-            border: 1px solid rgba(56,189,248,0.6);
-            color: #e0f2fe;
-            font-size: 0.8rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
-        }
-
-        .side-hint-badge-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 999px;
-            background: #22d3ee;
-            box-shadow: 0 0 10px rgba(34,211,238,0.9);
-        }
-
-        .side-hint-badge:hover {
-            background: rgba(15,23,42,1);
-            box-shadow: 0 0 18px rgba(56,189,248,0.65);
-            transform: translateY(-1px);
-        }
-
-        .side-hint-badge:active {
-            transform: translateY(0);
-            box-shadow: 0 0 10px rgba(56,189,248,0.45);
-        }
-
+        /* 小六邊形裝飾（抽象科技感） */
         .hex-deco {
             position: absolute;
             width: 80px;
@@ -214,12 +203,15 @@
                 margin-left: auto;
                 margin-right: auto;
             }
-            .content-row {
-                flex-direction: column;
+            .content-main {
                 align-items: center;
-            }
-            .side-hint {
                 text-align: center;
+            }
+            .intro-text {
+                text-align: center;
+            }
+            .enter-section {
+                justify-content: center;
             }
             .hex-deco.hex-1 {
                 right: 12px;
@@ -233,6 +225,7 @@
 <body>
 
     <div class="entrance-wrap">
+        <!-- 科技感六邊形裝飾 -->
         <div class="hex-deco hex-1"></div>
         <div class="hex-deco hex-2"></div>
 
@@ -244,26 +237,21 @@
             </div>
         </div>
 
-        <div class="content-row">
-            <!-- 圖片：點擊進入主站 -->
-            <a class="pokeball-link" href="lab.html">
-                <img class="pokeball-img" src="png/Chyilab.png"
-                     alt="Chyi Lab Pokéball Entrance">
-            </a>
+        <div class="content-main">
+            <div class="intro-text">
+                歡迎來到 Chyi Lab 線上入口。<br>
+                本實驗室專注於 化合半導體元件磊晶與製程，
+                結合磊晶製程與材料成長、元件結構設計與元件製程，探索新一代功率半導體技術。
+            </div>
 
-            <div class="side-hint">
-                <div class="side-hint-title">點擊寶可夢進入實驗室</div>
-                <div class="side-hint-body">
-                    歡迎來到 Chyi Lab 線上入口。<br>
-                    你可以點擊左側的寶可夢入口圖片，<br>
-                    或點擊下方高亮提示，一起進入實驗室主網站。
-                </div>
-
-                <!-- 這裡也可以點擊，連到同一個 lab.html -->
-                <a class="side-hint-badge" href="lab.html">
-                    <span class="side-hint-badge-dot"></span>
-                    <span>CLICK THE POKÉBALL TO ENTER</span>
+            <div class="enter-section">
+                <!-- 這個按鈕是主要入口：把 href 改成實際首頁檔名 -->
+                <a class="enter-btn" href="lab.html">
+                    Enter Lab Website
                 </a>
+                <div class="enter-hint">
+                    點擊按鈕進入實驗室主網站，查看成員、研究方向與論文發表。
+                </div>
             </div>
         </div>
     </div>
