@@ -2,527 +2,273 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>首頁 - 教授個人網站</title>
+    <title>Chyi Lab Entrance</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
     <style>
-        :root {
-            --bg: #020617;
-            --bg-card: #020819;
-            --bg-soft: #0b1120;
-            --border-subtle: #1f2937;
-            --accent: #38bdf8;
-            --accent-soft: rgba(56,189,248,0.12);
-            --text-main: #e5e7eb;
-            --text-muted: #9ca3af;
-            --heading: #f9fafb;
-        }
-
         * {
             box-sizing: border-box;
         }
 
         body {
             margin: 0;
+            min-height: 100vh;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
                          "Noto Sans TC", "PingFang TC", sans-serif;
-            background:
-                radial-gradient(circle at 0% 0%, #1d2a41 0, transparent 50%),
-                radial-gradient(circle at 100% 0%, #0b1120 0, transparent 55%),
-                linear-gradient(160deg, #020617 0%, #020617 60%, #020617 100%);
-            color: var(--text-main);
-            line-height: 1.75;
-        }
-
-        /* --------------- 導覽列 --------------- */
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            background: rgba(15,23,42,0.96);
-            border-bottom: 1px solid var(--border-subtle);
-            backdrop-filter: blur(10px);
-        }
-
-        nav .nav-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 10px 18px;
             display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 10px 20px;
-            justify-content: space-between;
-        }
-
-        nav .nav-title {
-            font-size: 0.95rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            white-space: nowrap;
-        }
-
-        nav .nav-links {
-            flex: 1;
-            text-align: right;
-            font-size: 0.9rem;
-        }
-
-        nav a {
-            color: var(--text-main);
-            text-decoration: none;
-            padding: 4px 8px;
-            margin: 0 2px;
-            border-radius: 999px;
-            transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
-        }
-
-        nav a:hover {
-            background: var(--accent-soft);
-            color: var(--accent);
-            transform: translateY(-1px);
-        }
-
-        /* --------------- 內容框架 --------------- */
-        .page-wrapper {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 32px 18px 56px;
-        }
-
-        .eyebrow {
-            display: inline-block;
-            font-size: 0.8rem;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--accent);
-            background: var(--accent-soft);
-            padding: 4px 10px;
-            border-radius: 999px;
-            margin-bottom: 10px;
-        }
-
-        /* --------------- Hero 區塊 --------------- */
-        .hero {
-            padding: 28px 24px 26px;
-            border-radius: 20px;
-            background:
-                radial-gradient(circle at 0% 0%, rgba(56,189,248,0.18), transparent 58%),
-                linear-gradient(135deg, #020617, #0b1120 45%, #020617 100%);
-            border: 1px solid rgba(148,163,184,0.5);
-            box-shadow: 0 22px 45px rgba(15,23,42,0.9);
-            margin-bottom: 32px;
-            display: grid;
-            grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.1fr);
-            gap: 20px;
-        }
-
-        .hero-title {
-            margin: 6px 0 6px;
-            font-size: 2.0rem;
-            color: var(--heading);
-        }
-
-        .hero-subtitle {
-            margin: 0;
-            font-size: 0.98rem;
-            color: var(--text-muted);
-        }
-
-        .hero-text {
-            margin-top: 14px;
-            font-size: 0.98rem;
-            color: var(--text-main);
-            max-width: 32em;
-        }
-
-        .hero-actions {
-            margin-top: 18px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .btn {
-            display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 8px 16px;
+            padding: 32px 16px;
+            color: #e5e7eb;
+
+            /* 深色科技感＋蜂巢背景 */
+            background-color: #020617;
+            background-image:
+                radial-gradient(circle at top, rgba(56,189,248,0.18), transparent 55%),
+                linear-gradient(30deg, #0b1220 12%, transparent 12.5%, transparent 87%, #0b1220 87.5%, #0b1220),
+                linear-gradient(150deg, #0b1220 12%, transparent 12.5%, transparent 87%, #0b1220 87.5%, #0b1220),
+                linear-gradient(90deg, #020617 2%, #020617 2.5%, #020617 97%, #020617 97.5%, #020617);
+            background-size:
+                100% 100%,
+                80px 140px,
+                80px 140px,
+                80px 140px;
+            background-position:
+                center,
+                0 0,
+                0 0,
+                0 0;
+            background-blend-mode: screen, normal, normal, normal;
+        }
+
+        .entrance-wrap {
+            width: 100%;
+            max-width: 720px;
+            background: radial-gradient(circle at top left, rgba(56,189,248,0.16), transparent 55%)
+                        , rgba(15,23,42,0.94);
+            border-radius: 28px;
+            box-shadow: 0 22px 50px rgba(0,0,0,0.75);
+            padding: 24px 28px 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .entrance-wrap::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(120deg,#22d3ee,#38bdf8,#f97316);
+            -webkit-mask:
+                linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.85;
+        }
+
+        .header {
+            position: relative;
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        .title {
+            margin: 0;
+            font-size: 1.6rem;
+            letter-spacing: 0.18em;
+            color: #f9fafb;
+        }
+
+        .subtitle {
+            margin-top: 6px;
             font-size: 0.9rem;
+            color: #9ca3af;
+        }
+
+        .title-underline {
+            width: 80px;
+            height: 3px;
+            margin-top: 10px;
             border-radius: 999px;
-            border: 1px solid transparent;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
-                        transform 0.15s ease, box-shadow 0.15s ease;
+            background: linear-gradient(90deg,#22d3ee,#38bdf8,#f97316);
         }
 
-        .btn-primary {
-            background: var(--accent);
-            color: #0b1120;
-            border-color: rgba(56,189,248,0.8);
-            box-shadow: 0 14px 30px rgba(8,47,73,0.8);
-        }
-
-        .btn-primary:hover {
-            background: #0ea5e9;
-            transform: translateY(-1px);
-            box-shadow: 0 18px 40px rgba(8,47,73,0.95);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--accent);
-            border-color: rgba(56,189,248,0.6);
-        }
-
-        .btn-outline:hover {
-            background: var(--accent-soft);
-            transform: translateY(-1px);
-        }
-
-        .hero-right {
-            border-radius: 16px;
-            padding: 16px 16px 14px;
-            background: rgba(15,23,42,0.9);
-            border: 1px solid rgba(51,65,85,0.9);
-        }
-
-        .hero-right-title {
-            font-size: 0.95rem;
-            color: var(--heading);
-            margin: 0 0 4px;
-        }
-
-        .hero-right-note {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin: 0 0 10px;
-        }
-
-        .hero-kv-list {
-            list-style: none;
-            margin: 0;
-            padding-left: 0;
-            font-size: 0.86rem;
-        }
-
-        .hero-kv-list li {
-            padding: 4px 0;
-            border-bottom: 1px dashed rgba(55,65,81,0.8);
-        }
-
-        .hero-kv-list li:last-child {
-            border-bottom: none;
-        }
-
-        /* --------------- 通用 section --------------- */
-        .section {
-            margin-top: 0;
-            padding: 22px 24px 20px;
-            border-radius: 18px;
-            background: rgba(15,23,42,0.9);
-            border: 1px solid rgba(51,65,85,0.9);
-        }
-
-        .section-header {
+        .content-row {
+            position: relative;
+            margin-top: 10px;
             display: flex;
-            align-items: baseline;
+            align-items: center;
             justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 24px;
+            flex-wrap: wrap;
         }
 
-        .section-title {
-            font-size: 1.05rem;
-            color: var(--heading);
-            border-left: 3px solid var(--accent);
-            padding-left: 10px;
-        }
-
-        .section-note {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .section a {
-            color: var(--accent);
+        .pokeball-link {
+            display: inline-block;
             text-decoration: none;
+            flex: 0 1 48%;
+            max-width: 360px;
         }
 
-        .section a:hover {
-            text-decoration: underline;
+        .pokeball-img {
+            width: 100%;
+            height: auto;
+            border-radius: 18px;
+            display: block;
+            cursor: pointer;
+            box-shadow: 0 18px 40px rgba(15,23,42,0.8);
+            transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
         }
 
-        /* --------------- 最新消息列表 --------------- */
-        .news-list {
-            list-style: none;
-            margin: 0;
-            padding-left: 0;
-            font-size: 0.9rem;
+        .pokeball-link:hover .pokeball-img {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 26px 60px rgba(15,23,42,0.95);
+            filter: brightness(1.05);
         }
 
-        .news-item {
-            padding: 10px 0 12px;
-            border-bottom: 1px solid rgba(31,41,55,0.95);
+        .side-hint {
+            flex: 1 1 210px;
+            position: relative;
+            color: #e5e7eb;
         }
 
-        .news-item:last-child {
-            border-bottom: none;
+        .side-hint-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #e5e7eb;
         }
 
-        .news-date {
+        .side-hint-body {
+            font-size: 0.93rem;
+            line-height: 1.7;
+            color: #9ca3af;
+        }
+
+        /* 這個 badge 現在是超連結 */
+        .side-hint-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(15,23,42,0.9);
+            border: 1px solid rgba(56,189,248,0.6);
+            color: #e0f2fe;
             font-size: 0.8rem;
-            color: var(--text-muted);
-            display: inline-block;
-            margin-bottom: 2px;
-        }
-
-        .news-highlight {
-            font-weight: 600;
-            color: var(--heading);
-        }
-
-        .news-small {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .featured-news {
-            margin-bottom: 6px;
-            padding: 12px 14px 10px;
-            border-radius: 14px;
-            background: radial-gradient(circle at 0% 0%, rgba(56,189,248,0.18), transparent 60%);
-            border: 1px solid rgba(56,189,248,0.7);
-        }
-
-        .featured-label {
-            display: inline-block;
-            font-size: 0.75rem;
-            letter-spacing: 0.16em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
         }
 
-        /* --------------- RWD --------------- */
-        @media (max-width: 800px) {
-            nav .nav-inner {
+        .side-hint-badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #22d3ee;
+            box-shadow: 0 0 10px rgba(34,211,238,0.9);
+        }
+
+        .side-hint-badge:hover {
+            background: rgba(15,23,42,1);
+            box-shadow: 0 0 18px rgba(56,189,248,0.65);
+            transform: translateY(-1px);
+        }
+
+        .side-hint-badge:active {
+            transform: translateY(0);
+            box-shadow: 0 0 10px rgba(56,189,248,0.45);
+        }
+
+        .hex-deco {
+            position: absolute;
+            width: 80px;
+            height: 70px;
+            border-radius: 16px;
+            border: 1px solid rgba(148,163,184,0.5);
+            opacity: 0.4;
+            transform: rotate(30deg);
+        }
+        .hex-deco.hex-1 {
+            top: 12px;
+            right: 40px;
+        }
+        .hex-deco.hex-2 {
+            bottom: 18px;
+            left: 50px;
+            width: 70px;
+            height: 60px;
+            opacity: 0.3;
+        }
+
+        @media (max-width: 720px) {
+            .header {
+                text-align: center;
+            }
+            .title-underline {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .content-row {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: center;
             }
-
-            nav .nav-links {
-                text-align: left;
-                width: 100%;
-                line-height: 1.6;
+            .side-hint {
+                text-align: center;
             }
-
-            .hero {
-                grid-template-columns: minmax(0,1fr);
+            .hex-deco.hex-1 {
+                right: 12px;
+            }
+            .hex-deco.hex-2 {
+                left: 16px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- 導覽列 -->
-    <nav>
-        <div class="nav-inner">
-            <div class="nav-title">Prof. Jen-Inn Chyi · Lab</div>
-            <div class="nav-links">
-                <a href="index.html">首頁</a>
-                <a href="professor.html">教授簡介</a>
-                <a href="research.html">研究計劃</a>
-                <a href="team.html">研究團隊</a>
-                <a href="achievements.html">研究成果</a>
-                <a href="publications.html">論文發表</a>
-                <a href="courses.html">開課內容</a>
-                <a href="equipment.html">實驗設備</a>
-                <a href="life.html">生活剪映</a>
-                <a href="links.html">相關連結</a>
+    <div class="entrance-wrap">
+        <div class="hex-deco hex-1"></div>
+        <div class="hex-deco hex-2"></div>
+
+        <div class="header">
+            <h1 class="title">CHYI LAB</h1>
+            <div class="title-underline"></div>
+            <div class="subtitle">
+                GaN &amp; Power Devices Research Group · National Central University
             </div>
         </div>
-    </nav>
 
-    <div class="page-wrapper">
+        <div class="content-row">
+            <!-- 圖片：點擊進入主站 -->
+            <a class="pokeball-link" href="lab.html">
+                <img class="pokeball-img" src="png/Chyilab.png"
+                     alt="Chyi Lab Pokéball Entrance">
+            </a>
 
-        <!-- Hero 區塊 -->
-        <section class="hero">
-            <div>
-                <span class="eyebrow">Laboratory of Compound Semiconductor Devices</span>
-                <h1 class="hero-title">綦振瀛教授 實驗室</h1>
-                <p class="hero-subtitle">
-                    國立中央大學 電機工程學系 · III-V / GaN 元件與光電整合研究
-                </p>
-
-                <p class="hero-text">
-                    歡迎來到綦振瀛教授個人網站。本實驗室專注於 III-V 半導體、
-                    GaN 功率元件與高頻光電元件之材料磊晶、元件製作與特性分析，
-                    結合產學合作與跨領域研究，培育下一代半導體專業人才。
-                </p>
-
-                <div class="hero-actions">
-                    <a class="btn btn-primary" href="professor.html">認識教授</a>
-                    <a class="btn btn-outline" href="research.html">查看研究計劃</a>
+            <div class="side-hint">
+                <div class="side-hint-title">點擊寶可夢進入實驗室</div>
+                <div class="side-hint-body">
+                    歡迎來到 Chyi Lab 線上入口。<br>
+                    你可以點擊左側的寶可夢入口圖片，<br>
+                    或點擊下方高亮提示，一起進入實驗室主網站。
                 </div>
+
+                <!-- 這裡也可以點擊，連到同一個 lab.html -->
+                <a class="side-hint-badge" href="lab.html">
+                    <span class="side-hint-badge-dot"></span>
+                    <span>CLICK THE POKÉBALL TO ENTER</span>
+                </a>
             </div>
-
-            <div class="hero-right">
-                <p class="hero-right-title">實驗室焦點 (Highlights)</p>
-                <p class="hero-right-note">GaN power devices · III-V HBT/HEMT · Optoelectronics</p>
-                <ul class="hero-kv-list">
-                    <li>GaN-on-Si、常關型功率元件與高電壓 HEMT 結構設計</li>
-                    <li>InP / InGaAs 系列高速異質接面雙極性電晶體 (HBT)</li>
-                    <li>量子點與奈米結構光電元件之成長與特性分析</li>
-                    <li>長期與國內外產業合作之 GaN / LED / RF 元件技術</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- 最新消息 -->
-        <section class="section">
-            <div class="section-header">
-                <h2 class="section-title">最新消息</h2>
-                <div class="section-note">獎學金、得獎紀錄與重要公告</div>
-            </div>
-
-            <div class="featured-news">
-                <div class="featured-label">For New Graduate Students</div>
-                <div class="news-item" style="border-bottom:none; padding-bottom:4px;">
-                    <span class="news-highlight">
-                        <a href="docs/letter_for_students.pdf" target="_blank">
-                            綦振瀛教授給研究所新生的一封信（請新生務必閱讀）
-                        </a>
-                    </span>
-                    <div class="news-small">
-                        點擊標題可直接在瀏覽器中開啟 PDF 閱讀，或使用瀏覽器「下載」功能儲存。
-                    </div>
-                </div>
-            </div>
-
-            <ul class="news-list">
-                <li class="news-item">
-                    <span class="news-highlight">
-                        賀!! 本實驗室博士班學生 Indraneel Sanyal（辛耶兒）
-                        榮獲 109 年度財團法人中技社科技獎學金：境外生研究獎學金
-                    </span>
-                    <div class="news-date">2020/11</div>
-                </li>
-
-                <li class="news-item">
-                    <span class="news-highlight">
-                        賀!! 綦振瀛 教授指導博士班學生薛惟仁同學以
-                        「Fabrication and Characterization of Al2O3/InAs Metal-Oxide-Semiconductor Field-Effect Transistors」
-                        榮獲 20th International Conference on Molecular Beam Epitaxy (ICMBE 2018) - Best Poster Award
-                    </span>
-                    <div class="news-date">2018/09/02</div>
-                </li>
-
-                <li class="news-item">
-                    綦振瀛 教授指導大學部孫逸然同學以
-                    「Metal/AlO/GaN 結構電容-電壓量測與界面缺陷分析」
-                    獲科技部 104 年度大專學生參與專題研究計畫補助
-                    <div class="news-date">2015/07/01</div>
-                </li>
-
-                <li class="news-item">
-                    賀!! 綦振瀛 教授榮獲潘文淵文教基金會 2015 研究傑出獎
-                </li>
-
-                <li class="news-item">
-                    賀!! 綦振瀛 教授以微電子工程相關之研究
-                    榮獲 102 年度科技部傑出研究獎
-                    <div class="news-date">2014/05</div>
-                </li>
-
-                <li class="news-item">
-                    感謝 Crosslight Software Inc. Crosslight Software Taiwan Branch 提供模擬軟體給化合物半導體課程學生使用
-                    （<a href="http://www.crosslight.com.tw" target="_blank">http://www.crosslight.com.tw</a>）
-                </li>
-
-                <li class="news-item">
-                    賀!! 綦振瀛 教授指導碩士班楊正宇獲 Garmin 獎學金
-                    <div class="news-date">2012/01/09</div>
-                </li>
-
-                <li class="news-item">
-                    賀!!!!!! 綦振瀛 教授榮膺 SPIE Fellow
-                    <div class="news-date">2011/12/13</div>
-                </li>
-
-                <li class="news-item">
-                    賀!!!! 綦振瀛 教授榮膺 2011 IEEE Fellow
-                    <div class="news-date">2011/11/25</div>
-                </li>
-
-                <li class="news-item">
-                    賀！綦振瀛 教授指導碩士班張哲安同學以
-                    「次微米銻砷化銦鎵基極之異質接面雙極性電晶體製程開發與射極尺寸效應之研究」
-                    榮獲中國電機工程學會 100 年青年論文獎第三名
-                    <div class="news-date">2011/10/17</div>
-                </li>
-
-                <li class="news-item">
-                    賀!! 綦振瀛 教授指導大學部蕭力函同學以
-                    「分子束磊晶成長之 GZO 光性與電性研究」
-                    榮獲國科會 99 年度大專學生參與專題研究計畫研究創作獎
-                    <div class="news-date">2011/08/05</div>
-                </li>
-
-                <li class="news-item">
-                    賀!! 綦振瀛 教授指導碩士班林憲佑獲凹凸電子股份有限公司獎學金
-                    <div class="news-date">2011/05/09</div>
-                </li>
-
-                <li class="news-item">
-                    賀!! 綦振瀛 教授指導碩士班林憲佑榮獲 Optics and Photonics Taiwan 2010 學生論文獎
-                    <div class="news-date">2010/12/03</div>
-                </li>
-
-                <li class="news-item">
-                    賀!! 綦振瀛 教授指導博士班張朝閔以
-                    「Characterization of Performance InAlAs/InGaAsSb/InGaAs Double Heterojunction Bipolar Transistors」
-                    榮獲 MBE Taiwan 2010 學生論文獎
-                    <div class="news-date">2010/05/24</div>
-                </li>
-
-                <li class="news-item">
-                    賀!! 綦振瀛 教授指導博士班劉學興以
-                    「Reduction of the efficiency droop of InGaN quantum well light-emitting diodes by using an In0.04Ga0.96N pre-layer and trimethylindium treatment」
-                    榮獲 Optics and Photonics Taiwan 2009 學生論文獎
-                    <div class="news-date">2009/12/23</div>
-                </li>
-
-                <li class="news-item">
-                    賀!! 綦振瀛 教授指導碩士班陳鵬壬以
-                    「Efficiency Enhancement of InGaN LEDs with an n-type AlGaN/GaN/InGaN Current Spreading Layer」
-                    榮獲 Optics and Photonics Taiwan 2009 學生論文獎
-                    <div class="news-date">2009/12/23</div>
-                </li>
-
-                <li class="news-item">
-                    賀!! 綦振瀛 教授指導碩士班王聖瑜以
-                    「Low Surface Recombination Velocity in InAlAs/InGaAsSb/InGaAs Double Heterojunction Bipolar Transistors」
-                    榮獲 MBE Taiwan 2009 學生論文獎
-                    <div class="news-date">2009/06/05</div>
-                </li>
-
-                <li class="news-item">
-                    賀!! 綦振瀛 教授指導碩士班江佩宜以
-                    「High Performance InAlAs/InGaAsSb/InGaAs Double Heterojunction Bipolar Transistors」
-                    榮獲 2008 台灣電子材料與元件協會傑出論文獎
-                    <div class="news-date">2008/12/12</div>
-                </li>
-            </ul>
-        </section>
+        </div>
     </div>
 
-    <div >Website crafted by Bill Chen · Last updated: 2025/11/15
-</div>
-                
 </body>
 </html>
+
 
