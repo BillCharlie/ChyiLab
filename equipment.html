@@ -131,8 +131,14 @@
         /* --------------- 實驗設備卡片 --------------- */
         .equipment-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* 一行兩張圖 */
             gap: 18px;
+        }
+
+        @media (max-width: 720px) {
+            .equipment-grid {
+                grid-template-columns: 1fr; /* 手機改成一欄 */
+            }
         }
 
         .equipment-card {
@@ -147,10 +153,10 @@
 
         .equipment-image {
             width: 100%;
-            height: 170px;
-            object-fit: cover;
+            height: 220px;         /* 固定高度框 */
+            object-fit: contain;   /* 圖片完整呈現，不裁切 */
             display: block;
-            background: #020617;
+            background: #020617;   /* 留白時的背景色 */
         }
 
         .equipment-body {
@@ -201,6 +207,14 @@
                 line-height: 1.6;
             }
         }
+
+        .footer {
+            max-width: 1100px;
+            margin: 0 auto 24px;
+            padding: 0 18px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
     </style>
 </head>
 <body>
@@ -233,42 +247,35 @@
     <div class="section-block">
         <div class="section-title">分子束磊晶系統 (MBE)</div>
         <div class="equipment-grid">
-            <!-- MBE 32P -->
+            <!-- MBE 1 -->
             <div class="equipment-card">
-                <img src="png/MBE1.png" alt="Riber MBE 32P" class="equipment-image">
+                <img src="png/MBE1.png" alt="分子束磊晶系統1" class="equipment-image">
                 <div class="equipment-body">
-                    <div class="equipment-name">分子束磊晶系統</div>
-                    <div class="equipment-en">Molecular Beam Epitaxy · Riber MBE 32P</div>
-                    <div class="equipment-meta">
-                        <div>用途：III-V 族化合物半導體材料成長</div>
-                    </div>
-                    <span class="equipment-tag">MBE-32</span>
+                    <div class="equipment-name">分子束磊晶系統1</div>
                 </div>
             </div>
 
-            <!-- MBE compact 21 -->
+            <!-- MBE 2 -->
             <div class="equipment-card">
-                <img src="png/MBE2.png" alt="Riber MBE Compact 21" class="equipment-image">
+                <img src="png/MBE2.png" alt="分子束磊晶系統2" class="equipment-image">
                 <div class="equipment-body">
-                    <div class="equipment-name">分子束磊晶系統</div>
-                    <div class="equipment-en">Molecular Beam Epitaxy · Riber MBE Compact 21</div>
-                    <div class="equipment-meta">
-                        <div>用途：III-V 族化合物半導體材料成長</div>
-                    </div>
-                    <span class="equipment-tag">Compact 21</span>
+                    <div class="equipment-name">分子束磊晶系統2</div>
                 </div>
             </div>
 
-            <!-- MBE compact 12 -->
+            <!-- MBE 3 -->
             <div class="equipment-card">
-                <img src="png/MBE3.png" alt="Riber MBE Compact 12" class="equipment-image">
+                <img src="png/MBE3.png" alt="分子束磊晶系統3" class="equipment-image">
                 <div class="equipment-body">
-                    <div class="equipment-name">分子束磊晶系統</div>
-                    <div class="equipment-en">Molecular Beam Epitaxy · Riber MBE Compact 12</div>
-                    <div class="equipment-meta">
-                        <div>用途：III-V 族化合物半導體材料成長</div>
-                    </div>
-                    <span class="equipment-tag">Compact 12</span>
+                    <div class="equipment-name">分子束磊晶系統3</div>
+                </div>
+            </div>
+
+            <!-- MBE 4 -->
+            <div class="equipment-card">
+                <img src="png/MBE4.jpg" alt="分子束磊晶系統4" class="equipment-image">
+                <div class="equipment-body">
+                    <div class="equipment-name">分子束磊晶系統4</div>
                 </div>
             </div>
         </div>
@@ -278,124 +285,51 @@
     <div class="section-block">
         <div class="section-title">有機金屬化學氣相沉積系統 (MOCVD)</div>
         <div class="equipment-grid">
-            <!-- AIXTRON 200/4 RF -->
+            <!-- 8吋 MOCVD -->
             <div class="equipment-card">
-                <img src="png/MOCVD.png" alt="AIXTRON 200/4 RF MOCVD" class="equipment-image">
+                <img src="png/8吋MOCVD.jpg" alt="8吋 MOCVD 系統 A" class="equipment-image">
                 <div class="equipment-body">
-                    <div class="equipment-name">MOCVD 系統</div>
-                    <div class="equipment-en">Metalorganic Chemical Vapor Deposition · AIXTRON 200/4 RF</div>
-                    <div class="equipment-meta">
-                        <div>用途：氮化鎵系列材料成長</div>
-                    </div>
+                    <div class="equipment-name">8吋 MOCVD 系統</div>
                     <span class="equipment-tag">MOCVD-1</span>
                 </div>
             </div>
 
-            <!-- CCS 6x2" FT MOCVD -->
+            <!-- 8吋 MOCVD -->
             <div class="equipment-card">
-                <img src="png/MOCVD2.png" alt="AIXTRON CCS 6x2&quot; FT MOCVD" class="equipment-image">
+                <img src="png/8吋MOCVD1號.jpg" alt="8吋 MOCVD 系統 B" class="equipment-image">
                 <div class="equipment-body">
-                    <div class="equipment-name">MOCVD 系統</div>
-                    <div class="equipment-en">
-                        Metalorganic Chemical Vapor Deposition ·
-                        AIXTRON / CCS 6×2&quot; (1×6&quot;) FT with LayTec EPITT curve
-                    </div>
-                    <div class="equipment-meta">
-                        <div>用途：氮化鎵系列材料成長</div>
-                    </div>
+                    <div class="equipment-name">8吋 MOCVD 系統</div>
+                    <span class="equipment-tag">MOCVD-1</span>
+                </div>
+            </div>
+
+            <!-- 6吋 MOCVD -->
+            <div class="equipment-card">
+                <img src="png/6吋MOCVD.jpg" alt="6吋 MOCVD 系統" class="equipment-image">
+                <div class="equipment-body">
+                    <div class="equipment-name">6吋 MOCVD 系統</div>
                     <span class="equipment-tag">MOCVD-2</span>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- 製程與量測設備 -->
-    <div class="section-block">
-        <div class="section-title">製程與量測設備</div>
-        <div class="equipment-grid">
-            <!-- FE-SEM -->
+            <!-- 4吋 MOCVD -->
             <div class="equipment-card">
-                <img src="png/SEM.png" alt="HITACHI S-4300 FE-SEM" class="equipment-image">
+                <img src="png/4吋MOCVD.jpg" alt="4吋 MOCVD 系統" class="equipment-image">
                 <div class="equipment-body">
-                    <div class="equipment-name">場發射掃描式電子顯微鏡</div>
-                    <div class="equipment-en">Field Emission Scanning Electron Microscope · HITACHI S-4300</div>
-                    <div class="equipment-meta">
-                        <div>用途：奈微米元件輪廓測量</div>
-                    </div>
-                    <span class="equipment-tag">FE-SEM</span>
-                </div>
-            </div>
-
-            <!-- E-gun evaporator -->
-            <div class="equipment-card">
-                <img src="png/Egun.png" alt="ULVAC E-gun evaporator" class="equipment-image">
-                <div class="equipment-body">
-                    <div class="equipment-name">電子槍濺鍍機</div>
-                    <div class="equipment-en">E-gun Evaporator (oxide material) · ULVAC</div>
-                    <div class="equipment-meta">
-                        <div>用途：成長 ZnO / ITO / SiO₂ 等薄膜，應用於半導體元件製作</div>
-                    </div>
-                    <span class="equipment-tag">E-gun</span>
-                </div>
-            </div>
-
-            <!-- Hall measurement -->
-            <div class="equipment-card">
-                <img src="png/Hall.png" alt="ACCENT HL5500 Hall system" class="equipment-image">
-                <div class="equipment-body">
-                    <div class="equipment-name">霍爾量測設備</div>
-                    <div class="equipment-en">Hall Measurement System · ACCENT HL5500</div>
-                    <div class="equipment-meta">
-                        <div>用途：量測載子濃度、移動率、電阻率與霍爾係數</div>
-                    </div>
-                    <span class="equipment-tag">Hall</span>
-                </div>
-            </div>
-
-            <!-- PL system -->
-            <div class="equipment-card">
-                <img src="png/PL.png" alt="PL system" class="equipment-image">
-                <div class="equipment-body">
-                    <div class="equipment-name">PL 光激發螢光系統</div>
-                    <div class="equipment-en">Photoluminescence System · KIMMON IK3552R-G-</div>
-                    <div class="equipment-meta">
-                        <div>用途：325 nm He-Cd 雷射激發之非破壞性材料光譜分析</div>
-                    </div>
-                    <span class="equipment-tag">PL</span>
-                </div>
-            </div>
-
-            <!-- TVR6000N rectifier tester -->
-            <div class="equipment-card">
-                <img src="png/TVR6000N.png" alt="POWORLD TVR6000N Rectifier Tester" class="equipment-image">
-                <div class="equipment-body">
-                    <div class="equipment-name">二極體電壓電流測試機</div>
-                    <div class="equipment-en">Rectifier Tester · POWORLD TVR6000N (5 V ~ -2000 V)</div>
-                    <div class="equipment-meta">
-                        <div>用途：二極體順向/逆向 I–V 特性量測，順向電流至 25 A，崩潰電壓至 2000 V</div>
-                    </div>
-                    <span class="equipment-tag">TVR6000N</span>
-                </div>
-            </div>
-
-            <!-- PQRR2009 (暫無圖片) -->
-            <div class="equipment-card">
-                <img src="png/PQRR2009.png" alt="POWORLD TVR6000N Rectifier Tester" class="equipment-image">
-                <div class="equipment-body">
-                    <div class="equipment-name">逆向回復時間 / 電荷測試機</div>
-                    <div class="equipment-en">Reverse Recovery Time / Charge Tester · POWORLD PQRR2009</div>
-                    <div class="equipment-meta">
-                        <div>用途：分析二極體逆向回復時間與電荷，評估開關損耗</div>
-                    </div>
-                    <span class="equipment-tag">PQRR2009</span>
+                    <div class="equipment-name">4吋 MOCVD 系統</div>
+                    <span class="equipment-tag">MOCVD-3</span>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
+<div class="footer">
+    Website crafted by Bill Chen · Last updated: 2025/11/15
 </div>
-   <div >Website crafted by Bill Chen · Last updated: 2025/11/15
-</div>
+
 </body>
 </html>
+
+
 
