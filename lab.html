@@ -273,6 +273,21 @@
             border-bottom: none;
         }
 
+        .news-images {
+    display: flex;
+    gap: 10px;          /* 圖片之間的間距 */
+    margin-top: 8px;
+    flex-wrap: wrap;    /* 螢幕太窄時允許換行 */
+}
+
+.news-images img {
+    flex: 1 1 0;
+    max-width: calc(50% - 5px);  /* 大約各佔一半寬 */
+    height: auto;
+    border-radius: 4px;
+}
+
+
         .news-date {
             font-size: 0.8rem;
             color: var(--text-muted);
@@ -402,6 +417,28 @@
                     </div>
                 </div>
             </div>
+            
+           <ul class="news-list"> 
+            <li class="news-item">
+              <span class="news-highlight">
+                  賀!! 綦振瀛 教授指導碩士班學生林宏洋同學榮獲 2025 International Electron Devices and Materials Symposium - Excellent Paper Award
+                 </span>
+                 <div class="news-date">2025</div>
+
+        <!-- 可折疊圖片區塊 -->
+        <details class="news-collapse">
+            <summary class="news-collapse-toggle">
+                 點此閱覽得獎照片
+            </summary>
+            <div class="news-images">
+                <img src="png/IEDMS1.jpeg" alt="IEDMS 2025 Excellent Paper Award 證書">
+                <img src="png/IEDMS2.jpeg" alt="IEDMS 2025 頒獎照片">
+            </div>
+        </details>
+    </li>
+</ul>
+
+
 
             <ul class="news-list">
                  <li class="news-item">
